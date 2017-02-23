@@ -1,0 +1,19 @@
+{
+  "name": "adtemplates",
+  "version": "0.0.0",
+  "description": "ad templates for dfp, adtech and so on",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/torstendunkel/adtemplates.git"
+  },
+  "author": "Torsten Dunkel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/torstendunkel/adtemplates/issues"
+  },
+  "homepage": "https://github.com/torstendunkel/adtemplates"
+}
