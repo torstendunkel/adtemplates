@@ -1,0 +1,124 @@
+<html>
+
+<head>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 308px;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        }
+
+        .ad_tutti_partnerbox .mb_cf:before, .mb_cf:after {
+            content: "";
+            display: table;
+        }
+
+        .ad_tutti_partnerbox .mb_cf:after {
+            clear: both;
+        }
+
+        .ad_tutti_partnerbox .mb_link {
+            display: block;
+            padding: 10px;
+            width: 288px;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: left;
+            outline: 0;
+        }
+
+        .ad_tutti_partnerbox .mb_img {
+            display: block;
+            float: left;
+            border: 3px solid #e4d8bb;
+            width: 64px;
+            height: 64px;
+        }
+
+        .ad_tutti_partnerbox .mb_box {
+            display: block;
+            float: left;
+            padding: 0 0 0 10px;
+            margin: 0;
+            width: 208px;
+            color: #3A3A3A;
+        }
+
+        .ad_tutti_partnerbox .mb_head {
+            font-family: "Helvetica Rounded LT Std", "Arial Rounded MT Bold", "Arial Rounded MT", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        }
+
+        .ad_tutti_partnerbox .mb_head, .mb_text, .ad_tutti_partnerbox .mb_address {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            line-height: 15px;
+        }
+
+        .ad_tutti_partnerbox .mb_head, .ad_tutti_partnerbox .mb_address {
+            font-style: normal;
+            font-size: 14px;
+            display: block;
+        }
+
+        .ad_tutti_partnerbox .mb_address {
+            line-height: 13px;
+            font-size: 14px;
+            color: #426897;
+        }
+
+        .ad_tutti_partnerbox .mb_head:hover,.ad_tutti_partnerbox .mb_address:hover {
+            text-decoration: underline;
+        }
+
+
+        .ad_tutti_partnerbox .mb_text {
+            height: 40px;
+            max-width: 288px;
+            color: #666666;
+            font-size: 14px;
+            line-height: 1.3;
+        }</style>
+</head>
+<body class="desktop">
+<div class="ad_tutti_partnerbox">
+    <a class="mb_link mb_cf" href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
+        <img class="mb_img" src="[%Image%]" width="70" height="70">
+        <div class="mb_box">
+            <h1 class="mb_head">[%Headline%]</h1>
+            <p class="mb_text">[%Description%]</p>
+            <em class="mb_address">[%CallToAction%]</em>
+        </div>
+    </a>
+</div>
+
+<script>
+    (function(){
+        var impPixel = "[%ThirdPartyImpressionPixel%]";
+        if(impPixel.length>0){
+            var thirdImp = document.createElement("IMG");
+            thirdImp.src = impPixel;
+            thirdImp.width = "1px";
+            thirdImp.height = "1px";
+            thirdImp.position = "absolute";
+            thirdImp.top = "-100%";
+            document.body.appendChild(thirdImp);
+        }
+    })();
+</script>
+
+</body>
+</html>

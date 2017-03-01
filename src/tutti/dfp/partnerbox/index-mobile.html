@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>Tutti partnerbox mobile</title>
+    <style>
+        p{
+            margin: 0px !important;
+            padding: 0px !important;
+            line-height: 18px;
+        }
+        .pbhead2017{
+            color: black;
+            font-weight: 400;
+        }
+        .pbtext2017{
+            color: #666666;
+        }
+        .pbaddress2017{
+            text-decoration: none;
+            color: #70a8e8;
+        }
+        .container{
+            width: 100% !important;
+            text-align: left;
+            display: block;
+            min-height: 70px;
+        }
+        a .textcont {
+            vertical-align: middle !important;
+            min-height: 70px;
+            font-family: helvetica, arial, sans-serif !important;
+        }
+        a{
+            text-decoration: none !important;
+        }
+        .pbimg2017 {
+            width: 64px !important;
+            height: 64px !important;
+            background-color: yellow;
+            background-image: url("[%Image%]");
+            float: left !important;
+            border: 1px solid #f2f2f2;
+            margin-right: 5px;
+        }
+        .pbimgcont{
+            float: left;
+            height: 74px !important;
+        }
+    </style>
+</head>
+<body>
+<div id="afd">
+    <a href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
+        <div class="container">
+            <div class="pbimgcont">
+                <div class="pbimg2017"></div>
+            </div>
+            <div id="inner" class="textcont">
+                <div class="pbhead2017">
+                    <p>[%Headline%]</p>
+                </div>
+                <div class="pbtext2017">
+                    <p>[%Description%]</p>
+                </div>
+                <div class="pbaddress2017">
+                    <p> [%CallToAction%]</p>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <script>
+        (function(){
+            var impPixel = "[%ThirdPartyImpressionPixel%]";
+            if(impPixel.length>0){
+                var thirdImp = document.createElement("IMG");
+                thirdImp.src = impPixel;
+                thirdImp.width = "1px";
+                thirdImp.height = "1px";
+                thirdImp.position = "absolute";
+                thirdImp.top = "-100%";
+                document.body.appendChild(thirdImp);
+            }
+        })();
+    </script>
+</div>
+</body>
+
+</html>
