@@ -66,6 +66,12 @@
     }
 
 
+    .mobile.app .link{
+        border:none;
+        padding : 0 !important;
+        line-height: 46px;
+    }
+
     .link::selected {
         color: #FFFFFF;
     }</style>
@@ -86,13 +92,32 @@
             thirdImp.top = "-100%";
             document.body.appendChild(thirdImp);
         }
-        if(document.referrer.indexOf('//www.') === -1){
-            try{
-                document.body.className = 'mobile';
-                window.parent.document.getElementById(window.frameElement.id).style.height="40px";
-                window.parent.document.getElementById(window.frameElement.id).style.width="100%";
-            }catch(e){}
+
+
+        var ref;
+        try{
+            ref = window.parent.document.location.href;
+        }catch(e){
+            ref = document.referrer;
         }
+
+        var height;
+        var bodyClass;
+        if(ref.indexOf('/www.') !== -1){
+            bodyClass = "desktop";
+            height = "20px";
+        }else if(ref.indexOf('/m.') !== -1){
+            bodyClass = "mobile";
+            height = "40px";
+        }else{
+            bodyClass = "mobile app";
+            height = "40px";
+        }
+        document.body.className=bodyClass;
+        try{
+            window.parent.document.getElementById(window.frameElement.id).style.height=height;
+            window.parent.document.getElementById(window.frameElement.id).style.width="100%";
+        }catch(e){}
     })();
 </script>
 </body>

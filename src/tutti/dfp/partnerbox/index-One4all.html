@@ -97,8 +97,9 @@
         }
 
         body.app{
-            margin-top:8px;
+            margin-top:4px;
         }
+
 
         .mobile  .mb_head{
             color: black;
@@ -125,7 +126,7 @@
         .mobile a .mb_text {
             vertical-align: middle !important;
             font-size:16px;
-            line-height: 18px;
+            line-height: 16px;
             margin: 0;
             padding: 0;
         }
@@ -143,7 +144,7 @@
 
     </style>
 </head>
-<body class="desktop">
+<body class="mobile app">
 <div class="container">
     <a class="mb_link mb_cf" href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
         <img class="mb_img" src="[%Image%]" width="70" height="70">
@@ -167,13 +168,33 @@
             thirdImp.top = "-100%";
             document.body.appendChild(thirdImp);
         }
-        if(document.referrer.indexOf('//www.') === -1){
-            try{
-                document.body.className = 'mobile';
-            }catch(e){}
-        }else if(document.referrer === ""){
-            document.body.className = 'mobile app';
+
+        var ref;
+        try{
+            ref = window.parent.document.location.href;
+        }catch(e){
+            ref = document.referrer;
         }
+        var height;
+        if(ref.indexOf('/www.') !== -1){
+            bodyClass = "desktop";
+            height = "90px";
+        }else if(ref.indexOf('/m.') !== -1){
+            bodyClass = "mobile";
+            height = "70px";
+        }else{
+            bodyClass = "mobile app";
+            height = "70px";
+        }
+        document.body.className=bodyClass;
+
+        try{
+            window.parent.document.getElementById(window.frameElement.id).style.height=height;
+            window.parent.document.getElementById(window.frameElement.id).style.width="100%";
+        }catch(e){}
+
+
+
     })();
 </script>
 
