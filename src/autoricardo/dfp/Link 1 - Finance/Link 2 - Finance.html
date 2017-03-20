@@ -101,3 +101,17 @@ body {
     }
     document.getElementById("adTxt4993563").innerHTML = financingLink4993563();
 </script>
+
+<script>
+    var impPixel = "[%ThirdPartyImpressionPixel%]";
+    if(impPixel.length>0){
+        var thirdImp = document.createElement("IMG");
+        thirdImp.src = impPixel;
+        thirdImp.width = "1px";
+        thirdImp.height = "1px";
+        thirdImp.position = "absolute";
+        thirdImp.top = "-10000px";
+        document.body.appendChild(thirdImp);
+    }
+
+</script>

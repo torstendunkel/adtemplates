@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adtech:bannerTemplate xmlns:adtech="http://www.adtech.de" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.adtech.de
+http://service.h2.adtech.de/h2/bannertemplate.xsd">
+    <mainData>
+        <name>FuW - sticky Wideboard - Test</name>
+        <description>Sticky Wideboard - Test</description>
+    </mainData>
+    <variables>
+
+        <FileUpload name="wb_img" caption="wideboard non sticky image" required="false" description="Image upload">
+            <maxSize>256000</maxSize>
+            <regExpPattern>.+\.(gif|GIF|jpg|JPG|PNG|png)</regExpPattern>
+        </FileUpload>
+
+        <FileUpload name="wb_img_sticky" caption="wideboard sticky image" required="false" description="Image upload">
+            <maxSize>256000</maxSize>
+            <regExpPattern>.+\.(gif|GIF|jpg|JPG|PNG|png)</regExpPattern>
+        </FileUpload>
+
+        <Number caption="sticky margin top" name="offset_top" required="false">
+            <default>0</default>
+        </Number>
+
+        <URL name="click_through_url" caption="Target URL" required="false" description="Please insert a url to the landingpage">
+        </URL>
+
+        <Boolean name="use_close_btn" caption="Select if your banner shall have a close button" required="false" description="Select if your banner shall have a close button">
+            <default>false</default>
+        </Boolean>
+
+        <Number name="autoclose_timeout" caption="Seconds after the sticky banner is closed" required="true" description="Seconds after the sticky banner is closed (0 if no autoclose)">
+            <default>0</default>
+        </Number>
+
+
+        <Text name="third_party_tag" caption="Insert your third party tag here." required="false" description="Insert your third party tag pixel here.">
+            <multiline>true</multiline>
+        </Text>
+
+        <Text name="third_party_tag_sticky" caption="Insert your third party tag for the sticky ad here." required="false" description="Insert your third party tag for the sticky ad here.">
+            <multiline>true</multiline>
+        </Text>
+
+        <Number caption="third party sticky ad iframe height" name="third_party_tag_sticky_height" required="false">
+            <default>100</default>
+        </Number>
+
+        <Number caption="third party sticky ad iframe width" name="third_party_tag_sticky_width" required="false">
+            <default>994</default>
+        </Number>
+
+        <Text name="pixel_counter" caption="Insert your third party counting pixel here." required="false" description="Insert your third party counting pixel here.">
+            <multiline>false</multiline>
+        </Text>
+    </variables>
+    <codelist>
+
+        <code filename="thirdParty.html">
+            <![CDATA[
+            <html>
+                <head>
+                </head>
+                <body>[third_party_tag]</body>
+            </html>
+            ]]>
+        </code>
+        <code filename="thirdPartySticky.html">
+            <![CDATA[
+            <html>
+                <head>
+                </head>
+                <body>[third_party_tag_sticky]</body>
+            </html>
+            ]]>
+        </code>
+
+        <code filename="index.html" xml:space="preserve">
+        <![CDATA[
+           <style>
+                *{
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+
+
+ <templatescript>    if ('[wb_img]' != '_ADPATH_null')    { </templatescript>
+        <div id="container">
+            <a href="_ADCLICK_[click_through_url]" target="_blank">
+                <img src="[wb_img]" alt="sticky wideboard image"/>
+            </a>
+        </div>
+ <templatescript> }  </templatescript>
+
+    <templatescript>    if ('[third_party_tag]' != '')    { </templatescript>
+        <div id="container">
+            <a href="_ADCLICK_[click_through_url]" target="_blank">
+                <iframe src="_ADPATH_thirdParty.html" width="994" height="250" scrolling="no" frameborder="0"></iframe>
+            </a>
+    </div>
+    <templatescript> }  </templatescript>
+
+
+<templatescript>    if ('[pixel_counter]' != '')    { </templatescript>
+<img src="[pixel_counter]" border="0" width="1" height="1" style="display:none"></img>
+<templatescript> }  </templatescript>
+
+<script>
+    var stickyWideBoard = (function () {
+        'use strict';
+
+        var settings = {
+            mainElem: 'container',
+            iframeWrapper: 'wideboard',
+            getAppendElem: function (context) {
+                //context => this
+                //function to calculate the append elem during runtime for easier configuration
+                return context.mainElement;
+            },
+            stickyBannerHTML:
+            '<div id="stickyWideboard">' +
+             <templatescript>    if (use_close_btn)    { </templatescript>
+                '<a class="close"></a>' +
+             <templatescript> } </templatescript>
+                    '<a href="_ADCLICK_[click_through_url]" target="_blank">' +
+                    <templatescript>    if ('[wb_img_sticky]' != '_ADPATH_null')    { </templatescript>
+                        '<img src="[wb_img_sticky]" alt="sticky wideboards image" /> '+
+                     <templatescript> }  </templatescript>
+                    <templatescript>    if ('[third_party_tag_sticky]' != '')    { </templatescript>
+                        '<iframe width="[third_party_tag_sticky_width]" height="[third_party_tag_sticky_height]" srolling="no" frameborder="0" id="wideboard_ifrm_sticky" src="_ADPATH_thirdPartySticky.html"> </iframe>'+
+                    <templatescript> }  </templatescript>
+                '</a>' +
+            '</div>',
+            animationClass: 'animation',
+            stickyOffset: 0,
+            stickyShowTime : [autoclose_timeout]*1000, // if 0 the stickyBanner will always be shown
+            stickyStyle: '#stickyWideboard {filter: alpha(opacity=0);opacity: 0;position: fixed;top: [offset_top]px;transition: all 0.25s ease-out;}#stickyWideboard.notrans{transition:none} #stickyWideboard.animation {filter: alpha(opacity=100);  opacity: 1;} #stickyWideboard .close {position: absolute;right: 0px;cursor: pointer;color: #fff;border-radius: 30px;background: #605F61;font-size: 30px;font-weight: bold;display: inline-block;line-height: 0px;padding: 11px 3px;top: 0px;margin: 3px;}#stickyWideboard .close:before {content: "×";}'
+        };
+
+        var StickyWideBoard = function () {
+            this.init();
+        };
+
+        StickyWideBoard.prototype = {
+
+            init: function () {
+
+                this.settings = settings;
+                this.wideboard = document.getElementById(this.settings.mainElem);
+                this.wideboardImg = this.wideboard.getElementsByTagName('img');
+
+                //when element is in iframe we need the iframe containing page wrapper
+                if (this.isInIframe()) {
+                    this.mainElement = window.parent.document.getElementById(this.settings.iframeWrapper);
+                    this.window = window.parent.document;
+                } else {
+                    this.mainElement = this.wideboard;
+                    this.window = document;
+                }
+
+                this.mainElemLoaded = false;
+                this.stickyElemLoaded = false;
+
+                //init stickyBanner
+                this.initStickyBanner();
+
+                this.initEvents();
+            },
+
+            initEvents: function () {
+                var _this = this;
+                //wait for main img to get loaded
+                if (this.wideboardImg.length > 0) {
+                    this.addEvent(this.wideboardImg[0], 'load', function () {
+                        _this.mainElemReady();
+                    });
+                } else {
+                    this.mainElemReady();
+                }
+
+                this.scrollHandler = this.checkScroll.bind(this);
+                this.addEvent(this.window, 'scroll', this.scrollHandler);
+            },
+
+            mainElemReady: function () {
+                this.mainElemHeight = this.wideboard.offsetHeight;
+                this.mainElemLoaded = true;
+                this.checkScroll();
+            },
+
+            checkScroll: function () {
+                //start checking when the imgages are loaded
+                if (!this.mainElemLoaded || !this.stickyElemLoaded) {
+                    return;
+                }
+                var bounding = this.mainElement.getBoundingClientRect();
+                //height of main Elem + fallback for older IEs
+                var bannerPosY = this.mainElemHeight;
+                var top = bounding.top;
+
+                if (top + bannerPosY + this.settings.stickyOffset < 0) {
+                    this.fadeInStickyElem();
+                } else if (top + bannerPosY + this.settings.stickyOffset > 0) {
+                    this.fadeOutStickyElem();
+                }
+            },
+
+            fadeInStickyElem: function () {
+                var _this = this;
+                if(!this.stickyTimeout && this.settings.stickyShowTime > 0){
+                    this.stickyTimeout = setTimeout(function(){
+                        _this.fadeOutStickyElem();
+                        _this.deactivateStickyBanner();
+                    }, this.settings.stickyShowTime);
+                }
+
+                //this.stickyBanner.style.top = this.window.body.scrollTop  + "px";
+                this.stickyBanner.className = this.settings.animationClass;
+            },
+
+            fadeOutStickyElem: function () {
+                if(this.stickyTimeout){
+                    clearTimeout(this.stickyTimeout);
+                    this.stickyTimeout = null;
+                }
+                this.stickyBanner.className = "";
+            },
+
+            initStickyBanner: function () {
+                var _this = this;
+
+                this.appendStyleToHead(this.settings.stickyStyle);
+
+                //append stickyBanner after wideboard node
+                this.stickyBanner = this.createDomNodeFromHTML(this.settings.stickyBannerHTML)[0];
+                //insert the sticky element
+                this.insertAfter(this.stickyBanner, this.settings.getAppendElem(this));
+                //check if an image is in the container
+                this.stickyBannerImg = this.stickyBanner.getElementsByTagName('img');
+
+                //if sticky Banner contains img wait until img is loaded
+                if (this.stickyBannerImg.length > 0) {
+                    this.addEvent(this.stickyBannerImg[0], 'load', function () {
+                        _this.stickyElemReady();
+                    });
+                } else {
+                    this.stickyElemReady();
+                }
+                this.initCloseBtn();
+                this.stickyBannerInitiliazed = true;
+            },
+
+            deactivateStickyBanner: function(){
+                this.window.removeEventListener('scroll',this.scrollHandler,false);
+            },
+
+            initCloseBtn: function () {
+                var _this = this;
+                var closeBtn = this.stickyBanner.getElementsByTagName("a")[0];
+                this.addEvent(closeBtn, 'click', function (e) {
+                    e.preventDefault();
+                    _this.fadeOutStickyElem();
+                    setTimeout(function () {
+                        _this.stickyBanner.parentNode.removeChild(_this.stickyBanner);
+                    }, 300);
+                });
+            },
+
+            stickyElemReady: function () {
+                this.setMargin();
+                this.stickyElemLoaded = true;
+                this.checkScroll();
+            },
+
+            // set the margin, to center the element in the wrapper and for setting the margin remove
+            // the transition of the element so that smaller elements are not fading in from the left.
+            setMargin: function(){
+                var _this = this;
+                this.stickyBanner.className += 'notrans';
+                this.stickyBannerWidth = this.stickyBanner.offsetWidth;
+                this.parentWidth = this.stickyBanner.parentNode.offsetWidth;
+                var marginLeft =  this.parentWidth -this.stickyBannerWidth;
+                this.stickyBanner.style.marginLeft = marginLeft/2 + "px";
+
+                setTimeout(function(){
+                    _this.stickyBanner.className = _this.stickyBanner.className.replace('notrans');
+                },10);
+
+            },
+
+            insertAfter: function (newNode, referenceNode) {
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            },
+
+            addEvent: function (elem, evnt, func) {
+                if (elem.addEventListener) // W3C DOM
+                    elem.addEventListener(evnt, func, false);
+                else if (elem.attachEvent) { // IE DOM
+                    elem.attachEvent("on" + evnt, func);
+                } else { // No much to do
+                    elem[evnt] = func;
+                }
+            },
+
+            createDomNodeFromHTML: function (html) {
+                var div = document.createElement('div');
+                div.innerHTML = html;
+                var elements = div.childNodes;
+                return elements;
+            },
+
+            appendStyleToHead: function (css) {
+                var head;
+                var style;
+                if (this.isInIframe()) {
+                    head = window.parent.document.getElementsByTagName('head')[0];
+                } else {
+                    head = window.document.getElementsByTagName('head')[0];
+                }
+                style = document.createElement('style');
+                head.appendChild(style);
+                style.setAttribute('type', 'text/css');
+                style.textContent = this.settings.stickyStyle;
+            },
+
+            isInIframe: function () {
+                try {
+                    return window.self !== window.top;
+                } catch (e) {
+                    return true;
+                }
+            }
+        };
+        return StickyWideBoard;
+    })();
+
+    //start the banner
+    new stickyWideBoard();
+</script>
+]]>
+</code>
+    </codelist>
+</adtech:bannerTemplate>
