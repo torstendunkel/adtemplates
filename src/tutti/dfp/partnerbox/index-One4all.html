@@ -158,17 +158,6 @@
 
 <script>
     (function(){
-        var impPixel = "[%ThirdPartyImpressionPixel%]";
-        if(impPixel.length>0){
-            var thirdImp = document.createElement("IMG");
-            thirdImp.src = impPixel;
-            thirdImp.width = "1px";
-            thirdImp.height = "1px";
-            thirdImp.position = "absolute";
-            thirdImp.top = "-100%";
-            document.body.appendChild(thirdImp);
-        }
-
         var ref;
         try{
             ref = window.parent.document.location.href;
@@ -192,9 +181,6 @@
             window.parent.document.getElementById(window.frameElement.id).style.height=height;
             window.parent.document.getElementById(window.frameElement.id).style.width="100%";
         }catch(e){}
-
-
-
     })();
 </script>
 
