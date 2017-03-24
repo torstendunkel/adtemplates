@@ -1,0 +1,69 @@
+<html>
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <style>
+
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        #content {
+            width: 100%;
+            height: 3500px;
+            background: lightgray;
+
+            padding-top: 500px;
+        }
+
+
+        #parent {
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            clip: rect(0px 302px 302px 0px);
+        }
+
+
+        #parent img{
+            position: fixed;
+            top: 20%;
+            transform: translateZ(0px);
+        }
+
+
+        .ad-wrapper{
+            border : 1px solid green;
+            height: 300px;
+            width: 300px;
+            padding: 20px;
+            position: relative;
+            left:33%;
+        }
+
+
+    </style>
+
+
+
+</head>
+
+
+<body>
+
+        <div id="content">
+            <p>sdfdsf dsfdsfdsf dsfdsf dsf f sdfsdf df</p>
+
+            <div class="ad-wrapper">
+                <div id="parent">
+                        <img id="img" src="http://placehold.it/300x400" width="300" height="400"/>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
