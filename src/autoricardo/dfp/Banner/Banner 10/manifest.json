@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "title": "eny Credit",
+  "description": "eny Credit Rectangle Banner",
+  "width": 300,
+  "height": 250,
+  "events": {
+    "enabled": 0,
+    "list": {
+    }
+  },
+  "clicktags": {
+    "clickTAG": "https://www.enyfinance.ch/de/?utm_source=stailamedia&utm_medium=banner&utm_campaign=DSP15Q4DTWD01"
+  },
+  "source": "add.html"
+}

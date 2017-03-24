@@ -1,0 +1,31 @@
+<div id="adCont_ADCUID_"></div>
+<script>
+var readyStateTester_ADCUID_ = function(f) {
+        /in/.test(document.readyState) ? setTimeout("WOAD.readyStateTester(" + f + ")", 4) : f();
+    },
+    startAd_ADCUID_ = function() {
+        var tmpmodel = "_ADDCP(model:default)_".replace(/_/gi, " ");
+        var tmpmake = "_ADDCP(make:default)_".replace(/_/gi, " ");
+        var tmpversion = "_ADDCP(version:default)_".replace(/_/gi, " ");
+        var tmplicen = "_ADDCP(licenceyear:default)_";
+        var iframeAll = document.createElement('iframe');
+        if (typeof pagevars !== "undefined") {
+            if (typeof pagevars.vehicleVersion !== "undefined" && pagevars.vehicleVersion !== "") {
+                tmpversion = pagevars.vehicleVersion.replace(/_/gi, " ");
+            }
+            if (typeof pagevars.vehicleMake !== "undefined" && pagevars.vehicleMake !== "") {
+                tmpmake = pagevars.vehicleMake.replace(/_/gi, " ").toUpperCase();
+            }
+        }
+        iframeAll.setAttribute("src", "https://test.allianz.ch/asu_cdn_banner/apps/asu_momf-banner-gui/index_de_CH.html?carYearOfFirstUse=" + tmplicen + "&car=" + tmpmake + ":" + tmpversion + "");
+        iframeAll.width = "310px";
+        iframeAll.height = "610px";
+        iframeAll.scrolling = "no";
+        iframeAll.frameBorder = 0;
+        document.getElementById("adCont_ADCUID_").appendChild(iframeAll);
+        document.getElementById("_ADCUID_").parentElement.className = document.getElementById("_ADCUID_").parentElement.className.replace("hidden", "");
+    };
+readyStateTester_ADCUID_(function() {
+    startAd_ADCUID_();
+});
+</script>
