@@ -1,0 +1,162 @@
+
+<html>
+<head>
+
+    <style>
+        html {
+        }
+
+        html, body {
+            padding:0;
+            margin:0;
+            height: 100%;
+            width : 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<a href="%%CLICK_URL_ESC%%[%clickTrough%]" id="clickTag"></a>
+
+
+<script>
+    (function(){
+
+        var streamingUrl = "[%StreamingUrl%]";
+
+        var frame, parentWindow, initWidth, initHeight;
+
+        applyPolyfills();
+        init();
+
+
+        function init(){
+
+            if(streamingUrl.length > 0){
+                appendStreamingUrl();
+            }
+
+            if(!isInFriendlyIframe()){
+                return;
+            }
+            frame = window.frameElement;
+            parentWindow = window.parent;
+
+            if(frame){
+                stretchIframe();
+                addEvent(parentWindow, "resize",stretchIframe);
+            }
+
+
+        }
+
+        function getWidth(){
+            return parentWindow.document.body.clientWidth;
+        }
+
+        function getHeight(){
+            return parentWindow.document.body.clientHeight;
+        }
+
+
+        function stretchIframe(){
+            window.requestAnimationFrame(function(){
+                var pWidth = getWidth();
+                var pHeight = getHeight();
+
+                var elemBounding = frame.getBoundingClientRect();
+
+                if(!initHeight && !initHeight){
+                    initHeight = elemBounding.height;
+                    initWidth = elemBounding.width;
+                }
+
+
+                var elemLeft  = elemBounding.left;
+                var elemTop   = elemBounding.top;
+
+                var expandWidth = pWidth - elemLeft;
+                var expandHeight = pHeight - elemTop;
+
+
+                // dont get smaller than the initial size
+                if(initHeight < expandHeight){
+                    frame.height = expandHeight + "px";
+                }
+                if(initWidth < expandWidth){
+                    frame.width = expandWidth + "px";
+                }
+            })
+        }
+
+        function isInFriendlyIframe(){
+            try{
+                var t = window.parent.document;
+            }catch(e){
+                return false;
+            }
+            return true;
+        }
+
+        function applyPolyfills(){
+            if (!window.requestAnimationFrame)
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                        timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+
+            if (!window.cancelAnimationFrame)
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+        }
+
+        function appendStreamingUrl(){
+            var iframe = document.createElement('iframe');
+            iframe.src = streamingUrl;
+            iframe.width ="100%";
+            iframe.height = "100%";
+            iframe.frameBorder = 0;
+            iframe.scrolling = "no";
+            document.getElementById("clickTag").appendChild(iframe);
+        }
+
+        function addEvent(elem, evnt, func) {
+            if (elem.addEventListener)  // W3C DOM
+                elem.addEventListener(evnt,func,false);
+            else if (elem.attachEvent) { // IE DOM
+                elem.attachEvent("on"+evnt, func);
+            }
+            else { // No much to do
+                elem[evnt] = func;
+            }
+        }
+
+
+    })();
+</script>
+
+
+<script>
+    var impPixel = "[%ThirdPartyImpressionPixelUrl%]";
+    if(impPixel.length>0){
+        var thirdImp = document.createElement("IMG");
+        thirdImp.src = impPixel;
+        thirdImp.width = "1px";
+        thirdImp.height = "1px";
+        thirdImp.style.position = "absolute";
+        thirdImp.style.top = "-100%";
+        document.body.appendChild(thirdImp);
+    }
+</script>
+
+[%ThirdPartyHTML%]
+
+</body>
+</html>

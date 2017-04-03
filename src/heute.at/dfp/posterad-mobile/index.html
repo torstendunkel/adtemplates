@@ -1,0 +1,106 @@
+<html>
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+
+
+        html,body{
+            margin:0;
+            padding:0;
+        }
+
+
+
+    </style>
+
+
+    <style id="style">
+        .understitial-parent {
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            clip: rect(0px 302px 302px 0px);
+        }
+        .understitial-parent .ad-container{
+            position: fixed;
+            bottom: 5%;
+            transform: translateZ(0px);
+        }
+    </style>
+
+
+
+</head>
+
+
+<body>
+        <div class="understitial-parent" id="inter" style="position: absolute; height: 100%; width:100%; clip: rect(0px 300px 300px 0px);">
+                <div class="ad-container" style="position: fixed; bottom: 5%; transform: translateZ(0px); left:0; right:0;" >
+                    <iframe scrolling="no" width="300" height="600" frameborder="0" src="https://s3-eu-west-1.amazonaws.com/media.das.tamedia.ch/testing/newsletter/Manner_8er_V2/Manner_8er_SiteBar_.html?clicktag=http://google.com"> </iframe>
+                </div>
+        </div>
+
+
+        <script>
+            var parentNode = window.frameElement.parentNode;
+            var bounding = parentNode.getBoundingClientRect();
+
+            var iframe = document.getElementsByTagName("iframe")[0];
+
+
+
+
+            var height;
+            var width;
+            try {
+                height = bounding.height + "px";
+                width =  bounding.width + "px";
+            } catch(e) {
+            }
+            var interstitial = document.getElementById("inter");
+
+            interstitial.style.clip = "rect(0px, "+ width +","+  height +",0px)";
+
+            parentNode.style.height = height;
+            parentNode.style.width = width;
+
+            parentNode.appendChild(interstitial);
+            frameElement.style.display="none";
+
+
+            if (window.addEventListener) {
+                window.parent.addEventListener("message", closeFrame, false);
+            }
+            else {
+                window.parent.attachEvent("onmessage", closeFrame);
+            }
+
+
+            function closeFrame(obj){
+                if(obj.data === "closeiframe"){
+                    parentNode.style.display="none";
+                }
+            }
+
+
+        </script>
+
+        <script>
+            var impPixel = "[%ThirdPartyImpressionPixelUrl%]";
+            if(impPixel.length>0){
+                var thirdImp = document.createElement("IMG");
+                thirdImp.src = impPixel;
+                thirdImp.width = "1px";
+                thirdImp.height = "1px";
+                thirdImp.style.position = "absolute";
+                thirdImp.style.top = "-100%";
+                document.body.appendChild(thirdImp);
+            }
+        </script>
+
+</body>
+</html>

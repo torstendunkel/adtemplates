@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/torstendunkel/adtemplates/issues"
   },
-  "homepage": "https://github.com/torstendunkel/adtemplates"
+  "homepage": "https://github.com/torstendunkel/adtemplates",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-replace": "^1.0.1"
+  }
 }

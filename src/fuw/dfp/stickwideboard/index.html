@@ -1,0 +1,268 @@
+<html>
+
+<head>
+
+</head>
+
+
+<body>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+
+<div id="container">
+    <a href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
+        <img src="[%WideboardImage%]" alt="wideboard image"/>
+    </a>
+</div>
+
+<script>
+    var stickyWideBoard = (function () {
+        'use strict';
+
+        var settings = {
+            mainElem: 'container',
+            getAppendElem: function (context) {
+                //context => this
+                //function to calculate the append elem during runtime for easier configuration
+                return context.mainElement;
+            },
+            stickyBannerHTML:
+            '<div id="stickyWideboard">' +
+            '<a class="close"></a>' +
+            '<a href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">' +
+            '<img src="[%WideboardImagesticky%]" alt="sticky wideboards image" /> '+
+            '</a>' +
+            '</div>',
+            animationClass: 'animation',
+            stickyOffset: 0,
+            stickyShowTime : [%autocloseafter%]*1000, // if 0 the stickyBanner will always be shown
+            stickyStyle: '#stickyWideboard {z-index:10;filter: alpha(opacity=0);opacity: 0;position: fixed;top: [%Stickyoffsettop%]px;transition: all 0.25s ease-out;}#stickyWideboard.notrans{transition:none} #stickyWideboard.animation {filter: alpha(opacity=100);  opacity: 1;} #stickyWideboard .close {position: absolute;right: 0px;cursor: pointer;color: #fff;border-radius: 30px;background: #605F61;font-size: 30px;font-weight: bold;display: inline-block;line-height: 0px;padding: 11px 3px;top: 0px;margin: 3px;}#stickyWideboard .close:before {content: "×";}'
+    };
+
+        var StickyWideBoard = function () {
+            this.init();
+        };
+
+        StickyWideBoard.prototype = {
+
+            init: function () {
+
+                this.settings = settings;
+                this.wideboard = document.getElementById(this.settings.mainElem);
+                this.wideboardImg = this.wideboard.getElementsByTagName('img');
+
+                //when element is in iframe we need the iframe containing page wrapper
+                if (this.isInIframe()) {
+                    this.mainElement = window.frameElement.parentElement;
+                    this.window = window.parent.document;
+                } else {
+                    this.mainElement = this.wideboard;
+                    this.window = document;
+                }
+
+                this.mainElemLoaded = false;
+                this.stickyElemLoaded = false;
+
+                //init stickyBanner
+                this.initStickyBanner();
+
+                this.initEvents();
+            },
+
+            initEvents: function () {
+                var _this = this;
+                //wait for main img to get loaded
+                if (this.wideboardImg.length > 0) {
+                    this.addEvent(this.wideboardImg[0], 'load', function () {
+                        _this.mainElemReady();
+                    });
+                } else {
+                    this.mainElemReady();
+                }
+
+                this.scrollHandler = this.checkScroll.bind(this);
+                this.addEvent(this.window, 'scroll', this.scrollHandler);
+            },
+
+            mainElemReady: function () {
+                this.mainElemHeight = this.wideboard.offsetHeight;
+                this.mainElemLoaded = true;
+                this.checkScroll();
+            },
+
+            checkScroll: function () {
+                //start checking when the imgages are loaded
+                if (!this.mainElemLoaded || !this.stickyElemLoaded) {
+                    return;
+                }
+                var bounding = this.mainElement.getBoundingClientRect();
+                //height of main Elem + fallback for older IEs
+                var bannerPosY = this.mainElemHeight;
+                var top = bounding.top;
+
+                if (top + bannerPosY + this.settings.stickyOffset < 0) {
+                    this.fadeInStickyElem();
+                } else if (top + bannerPosY + this.settings.stickyOffset > 0) {
+                    this.fadeOutStickyElem();
+                }
+            },
+
+            fadeInStickyElem: function () {
+                var _this = this;
+                if(!this.stickyTimeout && this.settings.stickyShowTime > 0){
+                    this.stickyTimeout = setTimeout(function(){
+                        _this.fadeOutStickyElem();
+                        _this.deactivateStickyBanner();
+                    }, this.settings.stickyShowTime);
+                }
+
+                //this.stickyBanner.style.top = this.window.body.scrollTop  + "px";
+                this.stickyBanner.className = this.settings.animationClass;
+            },
+
+            fadeOutStickyElem: function () {
+                if(this.stickyTimeout){
+                    clearTimeout(this.stickyTimeout);
+                    this.stickyTimeout = null;
+                }
+                this.stickyBanner.className = "";
+            },
+
+            initStickyBanner: function () {
+                var _this = this;
+
+                this.appendStyleToHead(this.settings.stickyStyle);
+
+                //append stickyBanner after wideboard node
+                this.stickyBanner = this.createDomNodeFromHTML(this.settings.stickyBannerHTML)[0];
+                //insert the sticky element
+                this.insertAfter(this.stickyBanner, this.settings.getAppendElem(this));
+                //check if an image is in the container
+                this.stickyBannerImg = this.stickyBanner.getElementsByTagName('img');
+
+                //if sticky Banner contains img wait until img is loaded
+                if (this.stickyBannerImg.length > 0) {
+                    this.addEvent(this.stickyBannerImg[0], 'load', function () {
+                        _this.stickyElemReady();
+                    });
+                } else {
+                    this.stickyElemReady();
+                }
+                this.initCloseBtn();
+                this.stickyBannerInitiliazed = true;
+            },
+
+            deactivateStickyBanner: function(){
+                this.window.removeEventListener('scroll',this.scrollHandler,false);
+            },
+
+            initCloseBtn: function () {
+                var _this = this;
+                var closeBtn = this.stickyBanner.getElementsByTagName("a")[0];
+                this.addEvent(closeBtn, 'click', function (e) {
+                    e.preventDefault();
+                    _this.fadeOutStickyElem();
+                    setTimeout(function () {
+                        _this.stickyBanner.parentNode.removeChild(_this.stickyBanner);
+                    }, 300);
+                });
+            },
+
+            stickyElemReady: function () {
+                this.setMargin();
+                this.stickyElemLoaded = true;
+                this.checkScroll();
+            },
+
+            // set the margin, to center the element in the wrapper and for setting the margin remove
+            // the transition of the element so that smaller elements are not fading in from the left.
+            setMargin: function(){
+                var _this = this;
+                this.stickyBanner.className += 'notrans';
+                this.stickyBannerWidth = this.stickyBanner.offsetWidth;
+                this.parentWidth = this.stickyBanner.parentNode.offsetWidth;
+                var marginLeft =  this.parentWidth -this.stickyBannerWidth;
+                this.stickyBanner.style.marginLeft = marginLeft/2 + "px";
+
+                setTimeout(function(){
+                    _this.stickyBanner.className = _this.stickyBanner.className.replace('notrans');
+                },10);
+
+            },
+
+            insertAfter: function (newNode, referenceNode) {
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            },
+
+            addEvent: function (elem, evnt, func) {
+                if (elem.addEventListener) // W3C DOM
+                    elem.addEventListener(evnt, func, false);
+                else if (elem.attachEvent) { // IE DOM
+                    elem.attachEvent("on" + evnt, func);
+                } else { // No much to do
+                    elem[evnt] = func;
+                }
+            },
+
+            createDomNodeFromHTML: function (html) {
+                var div = document.createElement('div');
+                div.innerHTML = html;
+                var elements = div.childNodes;
+                return elements;
+            },
+
+            appendStyleToHead: function (css) {
+                var head;
+                var style;
+                if (this.isInIframe()) {
+                    head = window.parent.document.getElementsByTagName('head')[0];
+                } else {
+                    head = window.document.getElementsByTagName('head')[0];
+                }
+                style = document.createElement('style');
+                head.appendChild(style);
+                style.setAttribute('type', 'text/css');
+                style.textContent = this.settings.stickyStyle;
+            },
+
+            isInIframe: function () {
+                try {
+                    return window.self !== window.top;
+                } catch (e) {
+                    return true;
+                }
+            }
+        };
+        return StickyWideBoard;
+    })();
+
+    //start the banner
+    new stickyWideBoard();
+</script>
+
+
+<script>
+    var impPixel = "[%ThirdPartyImpressionPixel%]";
+    if (impPixel.length > 0) {
+        var thirdImp = document.createElement("IMG");
+        thirdImp.src = impPixel;
+        thirdImp.width = "1px";
+        thirdImp.height = "1px";
+        thirdImp.style.position = "absolute";
+        thirdImp.style.top = "-10000px";
+        thirdImp.style.border = "none";
+        document.body.appendChild(thirdImp);
+    }
+
+</script>
+
+
+</body>
+
+</html>

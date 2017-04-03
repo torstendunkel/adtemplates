@@ -1,0 +1,14 @@
+
+
+{
+
+  "%%CLICK_URL_ESC%%[%ClickThroughUrl%]" : "http://google.ch",
+  "[%WideboardImage%]" : "http://placehold.it/994x250",
+  "[%WideboardImagesticky%]" : "http://placehold.it/994x180",
+  "[%autocloseafter%]" : 0,
+  "[%Stickyoffsettop%]" : 50,
+  "[%ThirdPartyImpressionPixel%]" : ""
+
+
+
+}
