@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+        <title>DFP - Regiobillboard-Template</title>
+        <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        div#rbb {
+            /* overflow: hidden; */
+            border: 1px solid #e5e5e5;
+            height: 350px;
+            background-color: #FEF4E9;
+            width: 640px;
+        }
+        .rbb_cont {
+            font-family:Georgia, "Times New Roman", Times, serif;
+            background-color: #FEF4E9;
+            font-style: inherit;
+            font-weight: inherit;
+            width: 305px;
+            overflow: hidden;
+            /* border: 1px solid #e5e5e5; */
+            float: left;
+            margin-left: 5px;
+            margin-top: 20px;
+            color: black;
+        }
+        .rbb_title{
+            float: left;
+            text-align: left;
+            width: 300px;
+            height: 25px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .rbb_description {
+            font-size: 15px;
+            font-weight: inherit;
+            height: 80px;
+            margin-top: 10px;
+            float: left;
+            white-space: pre-line;
+       }
+        .rbb_link{
+            float: left;
+            text-decoration: underline;
+            width: 300px;
+            height: 25px;
+            font-size: 18px;
+            text-align: left;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        </style>
+    </head>
+    <body>
+    <div id="rbb">
+        <a class="links" href="%c[%Urllinks%]" onclick="return rbb.click(this);" target="_blank">
+            <div class="rbb_cont left_cont">
+                <div class="rbb_img">
+                    <img src="[%Bildlinks%]" width="300" height="140">
+                </div>
+                <div class="rbb_title">[%Titellinks%]</div>
+                <div class="rbb_description ">[%Textlinks%]</div>
+                <div class="rbb_link">[%UrlBeschreibunglinks%]</div>
+            </div>
+        </a>
+        <a class="links" href="%c[%Urlrechts%]" onclick="return rbb.click(this);" target="_blank">
+            <div class="rbb_cont right_cont">
+                <div class="rbb_img">
+                    <img src="[%Bildrechts%]" width="300" height="140">
+                </div>
+                <div class="rbb_title">[%Titelrechts%]</div>
+                <div class="rbb_description">[%Textrechts%]</div>
+                <div class="rbb_link">[%UrlBeschreibungrechts%]</div>
+            </div>
+        </a>
+        </div>
+        <script type="text/javascript">
+        var rbb = {
+            thirdPartyImp: ["[%ImpressionCounterlinks%]", "[%ImpressionCounterrechts%]"],
+            readyStateTester: function(f) {
+                /in/.test(document.readyState) ? setTimeout("rbb.readyStateTester(" + f + ")", 4) : f();
+            },
+            thirdPartyImpCount: function(counterImgSrc) {
+                var thirdImp = document.createElement("IMG");
+                thirdImp.src            = counterImgSrc;
+                thirdImp.style.width    = "1px";
+                thirdImp.style.height   = "1px";
+                thirdImp.style.position = "absolute";
+                thirdImp.style.top      = "-100%";
+                document.style.body.appendChild(thirdImp);
+            },
+            click: function(e) { 
+                rbb.thirdPartyImp = e.getAttribute("href");
+                window.open(rbb.thirdPartyImp);
+                return false;
+            },
+            start: function() {
+                for (i = 0; i < rbb.thirdPartyImp.length; i++) { 
+                    rbb.thirdPartyImpCount(rbb.thirdPartyImp[i]);
+                }
+            }
+        };
+        rbb.readyStateTester(function() {
+            rbb.start();
+        });
+        </script>
+    </body>
+</html>
