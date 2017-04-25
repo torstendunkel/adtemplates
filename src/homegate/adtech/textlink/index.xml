@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template:bannerTemplate xmlns:template="http://www.adtech.de" xmlns:adtech="http://www.adtech.de" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://service.h2.adtech/h2/bannertemplate.xsd">
+    <mainData>
+        <name>Homegate Textlinks big/small</name>
+        <description>An image banner with link</description>
+    </mainData>
+    <variables>
+        <Text name="title" caption="banner title" required="true" description="Please enter a title here">
+            <maxlength>30</maxlength>
+        </Text>
+        <URL name="urllink" caption="link" required="true" description="Please enter a link url here"></URL>
+        <Boolean caption="show arrow icon" name="arrow" required="true" description="shall an arrow be shown before the link">
+            <default>false</default>
+        </Boolean>
+        <Boolean caption="render box" name="box" required="true" description="shall the link be wrapped in a box">
+            <default>false</default>
+        </Boolean>
+    </variables>
+    <codelist>
+        <code filename="index.html" xml:space="preserve">
+            <![CDATA[
+
+                   <templatescript> if ( box ) { </templatescript>
+                        <div class="box--addendum box--white box--padded text--right">
+                   <templatescript> } else if (!arrow) {</templatescript>
+                        <div class="margined--top-half">
+                   <templatescript> } </templatescript>
+
+                        <templatescript> if ( arrow ) { </templatescript>
+                            <i class="icon icon-chevron-right margined--right-half text--rel-85"></i>
+                        <templatescript> } </templatescript>
+                            <a href="_ADCLICK_[urllink]" class="text--smaller" target="_blank">[title]</a>
+
+                    <templatescript> if ( box || !arrow) { </templatescript>
+                        </div>
+                    <templatescript> } </templatescript>
+
+
+            ]]>
+        </code>
+    </codelist>
+</template:bannerTemplate>
