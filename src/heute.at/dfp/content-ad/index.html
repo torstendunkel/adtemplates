@@ -87,17 +87,31 @@
         .ad-image{
             max-width: 33%;
             min-width: 105px;
+            position: relative;
+            padding-left: 16px;
+            margin: auto;
         }
 
         .ad-image img {
             width : 100%;
+            vertical-align: middle;
         }
-
+        .ad-image:before {
+            position: absolute;
+            content: "";
+            width: 16px;
+            height: 100%;
+            background: url(https://s3-eu-west-1.amazonaws.com/media.das.tamedia.ch/assets/heute.at/img/sponsored.png);
+            background-repeat: no-repeat;
+            left:0px;
+            background-position: center center;
+            display: inline-block;
+        }
 
         .ad-content{
             text-align: left;
             padding-left: 10px;
-            width : 66%;
+            width : 62%;
 
             box-sizing: border-box;
         }
@@ -118,16 +132,16 @@
 <div class="container">
 
     <div class="ad-image">
-        <img src="http://placehold.it/249x166" />
+        <img src="[%Image%]" />
     </div>
 
     <div class="ad-content">
         <div class="ad-headline">
-            <h2>Headline</h2>
+            <h2>[%Headline%]</h2>
         </div>
 
         <div class="ad-description">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod </p>
+            <p>[%Description%]</p>
         </div>
     </div>
 

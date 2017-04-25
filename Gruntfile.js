@@ -10,8 +10,8 @@ module.exports = function(grunt) {
 
         watch: {
             template: {
-                files: ['src/**/*.js'],
-                tasks: ['replace:dist'],
+                files: ['src/**/*'],
+                tasks: ['build'],
                 options: {
                     interrupt: true,
                     spawn: true,
@@ -50,6 +50,11 @@ module.exports = function(grunt) {
                 src : ['src/**'],
                 dest: 'temp/folderlist.json'
             }
+        },
+        clean: {
+            temp: {
+                src: ['temp','build']
+            }
         }
 
     });
@@ -57,6 +62,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-folder-list');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.registerTask('replacePH', 'Set a config property.', function() {
 
@@ -68,6 +74,7 @@ module.exports = function(grunt) {
                 //read replace config
                 var config;
                 try{
+                    config = undefined;
                     config = grunt.file.readJSON(dir.replace(folderJSON[i].filename, 'replace.json'));
                 }
                 catch(e){
@@ -79,18 +86,26 @@ module.exports = function(grunt) {
                     var file = grunt.file.read(folderJSON[i].location);
 
                     for(var j in config){
-                        file = file.replace(j, config[j]);
+
+
+                        var tj = j.replace('[','\\[').replace(']','\\]');
+                        var reg = new RegExp(tj,"g");
+                        file = file.replace(reg, config[j]);
                     }
 
-                    mkdirp(dir.replace(folderJSON[i].filename,'').replace('src','build'), function (err) {
-                        fs.writeFile("build/" + dir.replace('src','build'), file, function(err) {
-                            console.info("writing", dir);
-                            if(err) {
-                                return console.log(err);
-                            }
-                            done();
+                    (function(done,dir,json,file){
+
+                        console.log(dir.replace(json.filename,'').replace('src','build'))
+
+                        mkdirp(dir.replace(json.filename,'').replace('src','build'), function (err) {
+                            fs.writeFile(dir.replace('src','build'), file, function(err) {
+                                if(err) {
+                                    return console.log(err);
+                                }
+                                done();
+                            });
                         });
-                    });
+                    })(done,dir,folderJSON[i],file)
                 }
             }
         }
@@ -101,7 +116,10 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('default',[
-        'watch:template'
+
+    grunt.registerTask('build',[
+        'clean:temp',
+        'folder_list',
+        'replacePH'
     ]);
 };

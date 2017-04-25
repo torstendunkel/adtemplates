@@ -1,14 +1,11 @@
-
-
 {
-
   "%%CLICK_URL_ESC%%[%ClickThroughUrl%]" : "http://google.ch",
-  "[%WideboardImage%]" : "http://placehold.it/994x250",
-  "[%WideboardImagesticky%]" : "http://placehold.it/994x180",
+  "[%WideboardImage%]" : "http://delay.at/http://placehold.it/994x250/1",
+  "[%WideboardImagesticky%]" : "http://delay.at/http://placehold.it/728x90",
   "[%autocloseafter%]" : 0,
-  "[%Stickyoffsettop%]" : 50,
-  "[%ThirdPartyImpressionPixel%]" : ""
-
-
+  "[%Stickyoffset%]" : 0,
+  "[%ThirdPartyImpressionPixel%]" : "",
+  "[%ThirdPartyTag%]" : "",
+  "[%stickyPosition%]" : "top"
 
 }
