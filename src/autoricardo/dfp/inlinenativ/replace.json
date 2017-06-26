@@ -1,0 +1,8 @@
+{
+  "%%CLICK_URL_ESC%%[%ClickThroughUrl%]" : "http://google.ch",
+  "[%description%]" : "Here is a demo native ad that we are going to restyle :)",
+  "[%headline%]" : "Testing native ad",
+  "[%image%]" : "http://placehold.it/148x148",
+  "[%admark%]" : "Werbung",
+  "[%price%]" : "CHF 29'001"
+}

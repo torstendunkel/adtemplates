@@ -1,0 +1,91 @@
+
+
+
+<div id="club_of_x_ad_list" class="box box--white box--padded margined--bottom hide-on-print">
+    <p class="h6 title">Ihre Übersicht</p>
+    <p> </p>
+
+
+    <ul class="list-plain list--attributed list--flat">
+        <li>
+            <div class="ad ad-panel ad-panel-clubofx display--inline-block text--smaller" id="overview_placement1">
+
+
+
+                <noscript>
+                    <a href="https://adssl-dc2.adtech.de/adlink|3.0|[networkID]|[overview_placement1]|0|[sizeID4]|ADTECH;loc=300;alias=" target="_blank">
+                        <img src="https://adssl-dc2.adtech.de/adserv|3.0|[networkID]|[overview_placement1]|0|[sizeID4]|ADTECH;loc=300;alias=" border="0" width="320" height="55">
+                    </a>
+                </noscript>
+            </div>
+
+        </li>
+        <li>
+
+            <div class="ad ad-panel ad-panel-clubofx display--inline-block text--smaller"  id="service_overview_placement2">
+
+                <noscript>
+                    <a href="https://adssl-dc2.adtech.de/adlink|3.0|[networkID]|[service_overview_placement2]|0|[sizeID4]|ADTECH;loc=300;alias=" target="_blank">
+                        <img src="https://adssl-dc2.adtech.de/adserv|3.0|[networkID]|[service_overview_placement2]|0|[sizeID4]|ADTECH;loc=300;alias=" border="0" width="320" height="55">
+                    </a>
+                </noscript>
+            </div>
+
+        </li>
+        <li>
+
+            <div class="ad ad-panel ad-panel-clubofx display--inline-block text--smaller" id="service_overview_placement3">
+
+                    <noscript>
+                        <a href="https://adssl-dc2.adtech.de/adlink|3.0|[networkID]|[service_overview_placement3]|0|[sizeID4]|ADTECH;loc=300;alias=" target="_blank">
+                            <img src="https://adssl-dc2.adtech.de/adserv|3.0|[networkID]|[service_overview_placement3]|0|[sizeID4]|ADTECH;loc=300;alias=" border="0" width="320" height="55">
+                        </a>
+                    </noscript>
+            </div>
+
+        </li>
+    </ul>
+
+</div>
+
+
+
+
+    <script>
+        // Add targeting
+        var adexkvstring_ADADID___ADBNID_ = "_ADKEYVALUE_";
+        var adex2_ADADID___ADBNID_ = adexkvstring_ADADID___ADBNID_.split(";");
+        var kvObject_ADADID___ADBNID_ = {};
+        adex2_ADADID___ADBNID_.forEach(function (entry) {
+            var singleKV = entry.split("=");
+            if (typeof singleKV[1] !== "undefined") {
+                kvObject_ADADID___ADBNID_[singleKV[0]] = singleKV[1];
+            }
+        });
+
+        ADTECH.config.placements[[service_overview_placement1]] = {protocol: 'https', server: 'adssl-dc2.adtech.de', network: '1152.1', siteid: '816791', sizeid: [sizeID1], params: {loc: '100', alias: '', target: '_blank' }, kv: kvObject_ADADID___ADBNID_};
+        ADTECH.config.placements[[service_overview_placement2]] = {protocol: 'https', server: 'adssl-dc2.adtech.de', network: '1152.1', siteid: '816791', sizeid: [sizeID2], params: {loc: '100', alias: '', target: '_blank' }, kv: kvObject_ADADID___ADBNID_};
+        ADTECH.config.placements[[service_overview_placement3]] = {protocol: 'https', server: 'adssl-dc2.adtech.de', network: '1152.1', siteid: '816791', sizeid: [sizeID3], params: {loc: '100', alias: '', target: '_blank' }, kv: kvObject_ADADID___ADBNID_};
+        ADTECH.loadAd([service_overview_placement3]);
+        ADTECH.loadAd([service_overview_placement2]);
+        ADTECH.loadAd([service_overview_placement3]);
+
+
+        $(window).load(function () {
+            var links = $("[id*='service_overview_'] a[href*='AdId=-3']");
+
+            links.each(function(index,elem){
+                $(elem).closest('li').hide();
+            });
+
+            if(links.length === 3 ){
+                $('#club_of_x_ad_list').hide();
+            }
+        });
+
+    </script>
+
+
+
+
+</div>

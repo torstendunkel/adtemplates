@@ -3,6 +3,7 @@
 
 <head>
 
+
     <style>
 
 
@@ -36,10 +37,10 @@
 
         .ric-ad-container {
             max-width: 749px;
-            color : red;
-
+            color: #000;
             height : 100px;
             padding: 16px 10px 16px 10px;
+            position: relative;
         }
 
         .ric-ad-header {
@@ -50,6 +51,10 @@
             justify-content: space-between;
             margin-bottom: 5px;
 
+        }
+
+        .ric-ad-content{
+            border-right: none;
         }
 
         .ric-ad-header span {
@@ -79,6 +84,10 @@
         .ric-ad-description {
             max-width : 350px;
             margin-left:16px;
+            color: #757575;
+            display:none;
+            font-size: 14px;
+            width: 100%;
         }
 
 
@@ -87,11 +96,44 @@
             flex-wrap: wrap;
         }
 
+        .ric-ad-mark{
+            font-size: 12px;
+            text-align: right;
+            border: 1px solid black;
+            border-radius: 4px;
+            padding: 3px 8px 1px 8px;
+            height: 12px;
+            margin-left: 16px;
+            margin-top: 16px;
+        }
 
-        @media (width: 749px), (width: 768px){
+        .ric-ad-price{
+            position: absolute;
+            bottom:0;
+            right: 0;
+            padding-bottom: 13px;
+            padding-right: 9px;
+            font-weight: 900;
+            color: orange;
+            font-family: Verdana,Geneva,sans-serif;
+            font-size: 14px;
+        }
+
+        .ric-ad-price:before {
+            content: 'CHF ';
+            font-size: 10px;
+        }
+
+
+        @media (min-width: 748.1px) and (max-width:749.9px), (min-width: 767.1px) and (max-width: 768.9px){
             .ric-ad-img img{
                 width : 148px;
                 height : 148px;
+            }
+
+            .ric-ad-content{
+                border-right: 1px solid #c5c5c5;
+                height: 150px;
             }
 
             .ric-ad-container {
@@ -103,11 +145,38 @@
             }
 
             .ric-ad-header {
-                margin-bottom: 20px;
+                height: 36px;
+                margin-bottom: 5px;
+            }
+            .ric-ad-description {
+                height: 107px;
+                display:block;
+            }
+
+            .ric-ad-mark {
+
+                margin-left: 16px;
+                margin-top: -60px;
+            }
+
+            .ric-ad-price{
+                padding-bottom: 20px;
+            }
+
+
+        }
+
+        @media (min-width: 748.1px) and (max-width:749.9px){
+            .ric-ad-content{
+                width : 422px;
             }
         }
 
-
+        @media (min-width: 767.1px) and (max-width: 768.9px){
+            .ric-ad-content{
+                width : 445px;
+            }
+        }
 
 
     </style>
@@ -118,23 +187,29 @@
 <body>
 
 
-    <a href="" target="_blank">
+    <a href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
         <div class="ric-ad-container">
             <div class="ric-ad-img">
-                <img src="http://placehold.it/148x148" alt=""/>
+                <img src="[%image%]" alt=""/>
             </div>
 
             <div class ="ric-ad-content">
                 <header class="ric-ad-header">
-                    <h2>Header</h2>
-                    <span class="ric-ad-mark">Sponsored Content</span>
+                    <h2>[%headline%]</h2>
                 </header>
                 <div class="ric-ad-description">
-                    <p>
-                        Lorem ipsum tralala.. adsd asd asd adasdasdas   dasd as asdsd adasd adasds d a asd as
+                    <p>[%description%]
+
                     </p>
                 </div>
+                <span class="ric-ad-mark">[%admark%]</span>
             </div>
+
+            <div class="ric-ad-price">
+                [%price%]
+            </div>
+
+
         </div>
     </a>
 

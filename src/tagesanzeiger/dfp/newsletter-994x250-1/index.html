@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tagesanzeiger Newsletter Subscribtion</title>
+
+
+
+    <style>
+
+
+        @font-face {
+            font-family: "Benton Sans Cond";
+            src: url("//www.tagesanzeiger.ch/css/fonts/benton/7bb9e5d1-f5d9-4a09-8b5d-770aa2f4228e-2.eot");
+            src: url("//www.tagesanzeiger.ch/css/fonts/benton/7bb9e5d1-f5d9-4a09-8b5d-770aa2f4228e-2.eot?") format("embedded-opentype"),
+            url("//www.tagesanzeiger.ch/css/fonts/benton/7bb9e5d1-f5d9-4a09-8b5d-770aa2f4228e-3.woff") format("woff"),
+            url("//www.tagesanzeiger.ch/css/fonts/benton/7bb9e5d1-f5d9-4a09-8b5d-770aa2f4228e-1.ttf") format("truetype"),
+            url("//www.tagesanzeiger.ch/css/fonts/benton/7bb9e5d1-f5d9-4a09-8b5d-770aa2f4228e-4.svg#web") format("svg");
+            font-style: normal;
+            font-weight: normal;
+        }
+
+
+        @font-face {
+            font-family: 'BentonSansCond-Bold';
+            src: url('https://s3.eu-central-1.amazonaws.com/assets.das.tamedia/fonts/tagesanzeiger/benton/BentonSansCond-Bold.eot');
+            src: url('https://s3.eu-central-1.amazonaws.com/assets.das.tamedia/fonts/tagesanzeiger/benton/BentonSansCond-Bold.woff2') format('woff2'),
+            url('https://s3.eu-central-1.amazonaws.com/assets.das.tamedia/fonts/tagesanzeiger/benton/BentonSansCond-Bold.woff') format('woff'),
+            url('https://s3.eu-central-1.amazonaws.com/assets.das.tamedia/fonts/tagesanzeiger/benton/BentonSansCond-Bold.ttf') format('truetype'),
+            url('https://s3.eu-central-1.amazonaws.com/assets.das.tamedia/fonts/tagesanzeiger/benton/BentonSansCond-Bold.svg#BentonSansCond-Bold') format('svg'),
+            url('https://s3.eu-central-1.amazonaws.com/assets.das.tamedia/fonts/tagesanzeiger/benton/BentonSansCond-Bold.eot?#iefix') format('embedded-opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+
+        body{
+            margin : 0;
+            padding: 0;
+            font-family: "BentonSansCond-Bold";
+            font-weight: 900;
+            letter-spacing: 0.1em;
+        }
+
+
+
+
+        .text{
+            font-size: 45px;
+            display: block;
+            padding: 23px 25px;
+            line-height: 53px;
+        }
+
+        .ad-wrapper{
+            width: 994px;
+            height: 250px;
+            background: #0079c1;
+            color: #fff;
+            position: relative;
+
+            background-image: url(https://s3-eu-west-1.amazonaws.com/media.das.tamedia.ch/assets/tagesanzeiger/img/bg-994x250.png);
+
+            background-size: 179px;
+            background-repeat: no-repeat;
+            background-position: 770px 10px;
+
+        }
+
+        .inputWrapper{
+            width: 457px;
+            height: 38px;
+            background: #fff;
+            padding: 3px 0px 3px 3px;
+            position: absolute;
+            top: 170px;
+            left: 517px;
+            box-sizing: content-box;
+            z-index: 2;
+        }
+
+        #sendBtn{
+        }
+
+        .inputWrapper .mail{
+            padding: 3px;
+            width: 331px;
+            font-size: 16px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            height:38px;
+        }
+        .inputWrapper .send{
+            background: #0079c1;
+            height: 38px;
+            border: none;
+            color: #fff;
+            width: 123px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            font-size: 15px;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+
+        .disclaimer {
+            position: absolute;
+            top: 218px;
+            width: 100%;
+            font-size: 10px;
+            font-weight: 100;
+            line-height: 12px;
+            box-sizing: border-box;
+            opacity: 0.8;
+            left: 517px;
+            letter-spacing: initial;
+            font-family: "Benton Sans Cond";
+        }
+
+        #success, #error {
+            display: none;
+            z-index: 2;
+        }
+
+        #error{
+            background: lightcoral;
+            width: 457px;
+            left: 517px;
+            opacity: 1;
+            text-align: center;
+        }
+        #success{
+            position: absolute;
+            top: 170px;
+            height: 43px;
+            left: 517px;
+            width: 460px;
+            font-size: 16px;
+            font-weight: 100;
+            line-height: 31px;
+            box-sizing: border-box;
+            padding: 5px 10px;
+            color: black;
+            background: #DFF2BF;
+            text-align: center;
+            font-family: "Benton Sans Cond";
+
+        }
+
+        .clicklayer{
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 25px;
+            left:25px;  
+            width: 163px;
+            height: 32px;
+            background-image: url("https://s3-eu-west-1.amazonaws.com/media.das.tamedia.ch/assets/tagesanzeiger/img/logo-klein-weiss.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+
+
+    </style>
+
+
+</head>
+
+<body>
+
+
+
+    <div class="ad-wrapper">
+
+        <a href="http://www.tagesanzeiger.ch/service/unsere-dienste/story/11046178?utm_source=Tages-Anzeiger&utm_campaign=DG_Subscriptionbanner_EditorialNL_TA&utm_medium=Banner&utm_content=WB_blau" class="clicklayer" target="_blank"> </a>
+
+            <span class="text">
+               Jetzt kostenlos mit dem neuen <br>
+                Newsletter in den Tag starten.
+            </span>
+
+            <div class="inputWrapper" id="wrapper">
+                <form id="sendBtn">
+                    <input type="email" value="" placeholder="Ihre E-Mail Adresse" class="mail" id="mail"><input type="submit" class="send" value="Senden">
+                </form>
+            </div>
+
+            <span class="disclaimer" id="msg">
+                Mit dem Klick auf «Senden» akzeptieren Sie unsere AGB- und Datenschutzrichtlinien.
+            </span>
+            <span class="disclaimer" id="error">
+                Ungültige E-Mail Adresse: E-Mail Adresse konnte nicht eingetragen werden.
+            </span>
+            <span id="success">
+                Vielen Dank für Ihre Anmeldung.
+            </span>
+
+
+            <div class="logo">
+
+
+            </div>
+
+
+    </div>
+    <script>
+        var url = "https://tgt.tamedia.ch/cre-1.0/api/tamedia/prospect_import/xhr";
+        var dataJSON = {
+            "email": "",
+            "origin": "web",
+            "source": "optinNewsletterEditorial_tagesanzeiger",
+            "opt_ins": [{
+                "valid_from": new Date().getTime(),
+                "optin_id": "optinNewsletterEditorial_tagesanzeiger",
+                "service_id": "tagesanzeiger"
+            }]
+        };
+
+        function addEvent(elem, evnt, func){
+            if (elem.addEventListener) // W3C DOM
+                elem.addEventListener(evnt, func, false);
+            else if (elem.attachEvent) { // IE DOM
+                elem.attachEvent("on" + evnt, func);
+            } else { // No much to do
+                elem[evnt] = func;
+            }
+        }
+
+        function postMail(mail){
+            dataJSON.email = mail;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    if(json.status === "ok"){
+                        showSuccess();
+                    }else{
+                        showError();
+                    }
+                }
+            };
+            var data = JSON.stringify(dataJSON);
+            xhr.send(data);
+        }
+        var sendBtn =  document.getElementById("sendBtn");
+        addEvent(sendBtn,"submit",function(e){
+            e.preventDefault();
+            (new Image()).src = "%%CLICK_URL_ESC%%";
+            postMail(document.getElementById("mail").value);
+        });
+
+
+        function showSuccess(){
+            var msg = document.getElementById("wrapper");
+            var error = document.getElementById("success");
+            msg.style.display = "none";
+            error.style.display = "block";
+        }
+
+        function showError(){
+            var msg = document.getElementById("msg");
+            var error = document.getElementById("error");
+            msg.style.display = "none";
+            error.style.display = "block";
+            setTimeout(function(){
+                msg.style.display = "block";
+                error.style.display = "none";
+            },5000);
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -13,12 +13,19 @@
         padding: 0;
     }
 
+
+    body {
+        background-color:rgba(255, 255, 255, 0.3);
+    }
+
+
     #stickyWideboard {
         z-index: 10;
         display: inline-block;
         filter: alpha(opacity=0);
         opacity: 0;
         transition: all 0.25s ease-out;
+        margin-left:50%; transform:translateX(-50%)
     }
 
     img,a{text-decoration: none; border: 0px}
@@ -50,7 +57,7 @@
         cursor: pointer;
         color: #fff;
         border-radius: 25px;
-        background: #605F61;
+        background:[%closebgcolor%];
         font-size: 30px;
         font-weight: bold;
         display: inline-block;
@@ -80,7 +87,7 @@
 
 <div id="container">
     <a href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
-        [%ThirdPartyTag%]
+        [%TopThirdPartyTag%]
     </a>
 </div>
 
@@ -104,14 +111,14 @@
             '</a>' +
             '</div>',
 
-            wideboardImg: '[%WideboardImage%]',
-            stickyWideboardImg: '[%WideboardImagesticky%]',
+            wideboardImg: ' [%TopWideboardImage%]',
+            stickyWideboardImg: '[%StickyWideboardImage%]',
             animationClass: 'animation',
             stickyOffset: 0,
             stickyTop: "[%Stickyoffset%]",
-            parentStyle: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx; left:LEFTpx",
+            parentStyle: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx;",
             parentStyleFallback: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx; left:LEFTpx;transform:scale(.5)",
-            stickyShowTime: parseInt("[%autocloseafter%]") * 1000, // if 0 the stickyBanner will always be shown
+            stickyShowTime: parseInt("[%autocloseafter%]") * 1000 // if 0 the stickyBanner will always be shown
         };
 
         var StickyWideBoard = function () {
@@ -126,12 +133,10 @@
                 this.wideboard = document.getElementById(this.settings.mainElem);
 
 
-                if (this.settings.wideboardImg.length > 0) {
+                if (this.settings.wideboardImg !== " ") {
                     this.wideboard.getElementsByTagName("a")[0].appendChild(this.createDomNodeFromHTML('<img src="' + this.settings.wideboardImg + '" />')[0]);
+                    this.wideboardImg = this.wideboard.getElementsByTagName('img');
                 }
-
-                this.wideboardImg = this.wideboard.getElementsByTagName('img');
-
 
                 // preinit bounding, will be updated on scroll
                 this.bounding = {
@@ -163,7 +168,7 @@
             initEvents: function () {
                 var _this = this;
                 //wait for main img to get loaded
-                if (this.wideboardImg.length > 0) {
+                if (this.wideboardImg && this.wideboardImg.length > 0) {
                     this.addEvent(this.wideboardImg[0], 'load', function () {
                         _this.mainElemReady();
                     });
@@ -221,7 +226,7 @@
                     this.frame.style.cssText = this.settings.parentStyle.replace("TOP", this.settings.stickyTop).replace("LEFT", this.stickyBannerMarginLeft);
                 }
                 this.frame.height = this.stickyBannerHeight;
-                this.frame.width = this.stickyBannerWidth;
+                //this.frame.width = this.stickyBannerWidth;
 
             },
 
@@ -234,7 +239,7 @@
                 this.stickyBanner.className = this.wideboard.className = "";
                 this.frame.style.cssText = "";
                 this.frame.height = this.mainElemHeight;
-                this.frame.width = this.mainElemWidth;
+                //this.frame.width = this.mainElemWidth;
             },
 
             initStickyBanner: function () {
@@ -278,14 +283,21 @@
             initCloseBtn: function () {
                 var _this = this;
                 var closeBtn = this.stickyBanner.getElementsByTagName("a")[0];
-                this.addEvent(closeBtn, 'click', function (e) {
-                    e.preventDefault();
-                    _this.fadeOutStickyElem();
-                    setTimeout(function () {
-                        _this.stickyBanner.parentNode.removeChild(_this.stickyBanner);
-                        _this.deactivateStickyBanner();
-                    }, 300);
-                });
+
+                if(this.settings.stickyShowTime === 0 ){
+
+                    this.addEvent(closeBtn, 'click', function (e) {
+                        e.preventDefault();
+                        _this.fadeOutStickyElem();
+                        setTimeout(function () {
+                            _this.stickyBanner.parentNode.removeChild(_this.stickyBanner);
+                            _this.deactivateStickyBanner();
+                        }, 300);
+                    });
+                }else{
+                    closeBtn.style.display ="none";
+                }
+
             },
 
             stickyElemReady: function () {
