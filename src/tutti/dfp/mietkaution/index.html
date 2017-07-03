@@ -1,0 +1,136 @@
+<html>
+
+
+<head>
+
+    <meta charset="utf-8">
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        }
+
+
+
+        body.mobile{
+            height: 40px;
+            width: 100%;
+        }
+
+        body.desktop{
+            height: 20px;
+            width: 300px;
+        }
+
+
+        .nolink, .nolink:hover {
+            color: black;
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007ab7;
+            cursor: pointer;
+        }
+
+        a:hover, a:focus {
+            text-decoration: underline;
+        }
+
+        .link {
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            font-size: 14px;
+        }
+
+
+        .mobile .link{
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #f2f2f2;
+            padding: 0 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: inherit;
+            box-sizing: border-box;
+        }
+
+
+        .mobile.app .link{
+            border:none;
+            padding : 0 !important;
+            line-height: 46px;
+        }
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+<body class="desktop">
+<div id="afd">
+    <a id="adTxt4993563" target="_blank" href="%%CLICK_URL_ESC%%%%DEST_URL%%" class="link"></a>
+</div>
+
+<script>
+    function financingLink4993563() {
+
+        var amount = '%%PATTERN:tutti_kvprice%%'.length > 0 && !isNaN(parseFloat('%%PATTERN:tutti_kvprice%%')) ? '%%PATTERN:tutti_kvprice%%' : 1000;
+        amount = parseFloat(amount);
+        var serviceCharge = parseFloat("[%ServiceCharge%]");
+
+
+        var percentage = parseInt('[%prozentsatz%]');
+
+
+        var rate = ((3 * amount * (percentage/100)) + serviceCharge) * (1 + percentage/100);
+        console.log(rate);
+
+        rate = rate.toFixed(2);
+
+        var text = '[%text%]';
+        text = text.split('[rate]');
+        return text[0] + rate + text[1];
+    }
+    document.getElementById("adTxt4993563").innerHTML = financingLink4993563();
+</script>
+
+<script>
+    var impPixel = "[%ThirdPartyImpressionPixel%]";
+    if (impPixel.length > 0) {
+        var thirdImp = document.createElement("IMG");
+        thirdImp.src = impPixel;
+        thirdImp.width = "1px";
+        thirdImp.height = "1px";
+        thirdImp.style.position = "absolute";
+        thirdImp.style.top = "-10000px";
+        thirdImp.style.border = "none";
+        document.body.appendChild(thirdImp);
+    }
+
+</script>
+
+
+</body>
+</html>
