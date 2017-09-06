@@ -1,0 +1,147 @@
+<script>
+    // Create the <style> tag
+    var style = document.createElement("style");
+
+    // WebKit hack
+    style.appendChild(document.createTextNode("#TM-container{\n" +
+        "            width:100%;\n" +
+        "             height:100%;\n" +
+        "            top:0;\n" +
+        "            left:0;\n" +
+        "            bottom:0;\n" +
+        "            right:0;\n" +
+        "            position:fixed;\n" +
+        "            z-index:10000000;\n" +
+        "            background-color: rgba(0, 0, 0, 0.6);\n" +
+        "        }\n" +
+        "\n" +
+        "        #TM-ad{\n" +
+        "            margin: 0 auto;\n" +
+        "        }\n" +
+        "\n" +
+        "        /* Portrait - Retina*/\n" +
+        "    @media all and (orientation:portrait) {\n" +
+        "        #TM-ad{\n" +
+        "            width: 600px;\n" +
+        "        }\n" +
+        "        #TM-imgAdLandscape{display:none}\n" +
+        "        #TM-imgAdPortrait{display:inline;\n" +
+        "            width: auto;\n" +
+        "            max-width: 600px;}\n" +
+        "    }\n" +
+        "\n" +
+        "        #TM-interstitalCloseContainer {\n" +
+        "            cursor: pointer;\n" +
+        "            position: absolute;\n" +
+        "            width: 39px;\n" +
+        "            height: 39px;\n" +
+        "            line-height: 25px;\n" +
+        "            top: 0;\n" +
+        "            left: 0;\n" +
+        "            margin: 10px 0 0 10px;\n" +
+        "            padding: 5px;\n" +
+        "            background-color: #fff;\n" +
+        "            opacity: 0.6;\n" +
+        "            border: 2px solid #000;\n" +
+        "            border-radius: 50%;\n" +
+        "            text-align: center;\n" +
+        "            font-family: \"Arial Black\", Gadget, sans-serif;\n" +
+        "            font-size: 20px;\n" +
+        "            display:  block;\n" +
+        "            z-index:10000001;\n" +
+        "        }\n" +
+        "        #TM-closeBtnWrapper{\n" +
+        "            display: block;\n" +
+        "            position: absolute;\n" +
+        "            top: 0;\n" +
+        "            left: 0;\n" +
+        "            margin: 0;\n" +
+        "            padding: 0;\n" +
+        "            width: 60px;\n" +
+        "            height: 60px;\n" +
+        "        }\n" +
+        "\n" +
+        "    /* Landscape */\n" +
+        "    @media all and (orientation:landscape) {\n" +
+        "\n" +
+        "        #TM-ad{\n" +
+        "            width: 800px;\n" +
+        "        }\n" +
+        "        #TM-imgAdPortrait{display:none}\n" +
+        "        #TM-imgAdLandscape{display:inline;\n" +
+        "            width: auto;\n" +
+        "            max-width: 800px;}"));
+
+    // Add the <style> element to the page
+    parent.document.head.appendChild(style);
+
+
+    //create div elements
+    var doc = parent.document.getElementsByTagName("body")[0];
+    var container = document.createElement("div");
+    var container_ad = document.createElement("div");
+    var closewrapper = document.createElement("div");
+    var closebutton = document.createElement("div");
+    var link = document.createElement("a");
+    var imglandscape = document.createElement("img");
+    var imgportrait = document.createElement("img");
+    var thirdImp = document.createElement("img");
+
+    //Assign Div ids
+    container.id = "TM-container";
+    container_ad.id = "TM-ad";
+    closewrapper.id ="TM-closeBtnWrapper";
+    closebutton.id ="TM-interstitalCloseContainer";
+    imglandscape.id = "TM-imgAdLandscape";
+    imgportrait.id = "TM-imgAdPortrait";
+
+    //Assign other values
+    closebutton.innerText ="X";
+    link.href = "%%CLICK_URL_UNESC%%[%ClickThroughURL%]";
+    imglandscape.src="[%LandscapeImg%]";
+    imgportrait.src="[%PortraitImg%]";
+    link.target = "_blank";
+
+    //nest divs and append divs to body
+    closewrapper.appendChild(closebutton);
+    link.appendChild(imgportrait);
+    link.appendChild(imglandscape);
+    container_ad.appendChild(link);
+    container.appendChild(container_ad);
+    container.appendChild(closewrapper)
+    doc.appendChild(container);
+
+    //close function
+    parent.TMCloseLayer = function () {
+        parent.document.getElementById("TM-container").style.cssText = "display: none; width: 0px; height: 0px;";
+        parent.document.getElementById("TM-closeBtnWrapper").style.cssText = "display: none; width: 0px; height: 0px;";
+
+    }
+    setTimeout(parent.TMCloseLayer, parseInt("[%DisplayTime%]")*1000);
+
+    //add click listener to for close
+    parent.document.getElementById("TM-closeBtnWrapper").addEventListener("click", function () {
+        parent.TMCloseLayer();
+    });
+
+    //preview close bug
+    if (this.frameElement == null){
+        document.getElementById("TM-interstitalCloseContainer").style.cssText = "width: 25px;height: 25px;";
+    }
+    else
+    {
+        //Close iframe since we brokeout it
+        this.frameElement.style.cssText = "width:1px;height:1px;display:none;";
+    }
+
+    //third party impression tracker
+    thirdImp.src = "[%ThirdPartyImpressionTracker%]";
+    with (thirdImp.style) {
+        width = "1px";
+        height = "1px";
+        position = "absolute";
+        top = "-100%"
+    }
+    document.body.appendChild(thirdImp);
+
+</script>
