@@ -88,7 +88,7 @@ module.exports = function(grunt) {
                     for(var j in config){
 
 
-                        var tj = j.replace('[','\\[').replace(']','\\]');
+                        var tj = j.replace('[','\\[').replace(']','\\]').replace('&','\\&').replace('?','\\?');
                         var reg = new RegExp(tj,"g");
                         file = file.replace(reg, config[j]);
                     }

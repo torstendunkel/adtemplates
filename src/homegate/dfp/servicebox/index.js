@@ -1,0 +1,68 @@
+
+
+console.log("servicebox 1.6");
+
+
+
+var frame;
+try{
+    frame = window.frameElement;
+
+
+    var template = '<div class="s_placement ad-container" style="display:none"><a href="%%url%%" target="_blank"><h4 class="s_title">%%headline%%</h4><div class="s_content"><img class="s_adImage" src="%%image%%"/><p class="s_description">%%description%%</p></div><p class="s_adUrlText">%%linkText%%</p></a></div>';
+    var styles = "#adServicesPanel .box{display: flex; flex-wrap: wrap;    padding: 0;} #adServicesPanel .ad-panel{flex: 1 1 350px;} .ad-container.s_placement{background-color: white; padding: 15px; color: black; } .ad-container .s_title{ margin-top: 0px; font-size: 14px !important; } .ad-container.s_placement a{ color: black; font-weight: 400; } .ad-container.s_placement a:hover{ text-decoration: none; } .ad-container.s_placement .s_adImage{ height: 110px; width: 110px; margin-right: 15px; flex: 0 0 110px; } .ad-container .s_adUrlText{ font-weight: bold; color: #e63232 !important; position: relative; bottom: 0; } .ad-container .s_adUrl{ cursor: pointer; } .ad-container p{ margin: 0px; } .ad-container .s_content { margin-bottom: 15px; display: flex; } .s_description{color: #5f5f5f ; } @media (max-width: 47.99em){#adServicesPanel .ad-panel {        margin-left: 0px;        margin-right: 0px;    } }";
+
+
+
+    appendStyleToHead();
+
+    var regex;
+    for(var key in templateVars){
+        if(templateVars.hasOwnProperty(key)){
+            regex = new RegExp("%%"+key+"%%","g");
+            template = template.replace(regex,templateVars[key]);
+        }
+    }
+    template = stringToHTML(template);
+
+    //frame.parentElement.appendChild(template[0]);
+
+    document.body.appendChild(template[0]);
+
+    var img = document.body.getElementsByClassName("s_adImage");
+    frame.parentElement.appendChild(document.getElementsByClassName("ad-container")[0]);
+    frame.parentElement.getElementsByClassName("s_placement")[0].style.display="block";
+
+    frame.style.display = "none";
+
+
+}catch(e){
+    console.error("something went wrong in servicebox template");
+}
+
+
+function stringToHTML(str){
+    var div = document.createElement('div');
+    div.innerHTML = str;
+    return div.childNodes;
+}
+
+
+function appendStyleToHead(){
+    var styleID = "homegate_servicebox";
+    if(window.top){
+        try{
+            if(!window.top.document.getElementById(styleID) ||  window.top.document.getElementById(styleID).length === 0){
+                var style = document.createElement("style");
+                style.type = 'text/css';
+                style.id = styleID;
+                if (style.styleSheet){
+                    style.styleSheet.cssText = styles;
+                } else {
+                    style.appendChild(document.createTextNode(styles));
+                }
+                window.top.document.head.appendChild(style);
+            }
+        }catch(e){}
+    }
+}

@@ -18,6 +18,9 @@
         background-color:rgba(255, 255, 255, 0.3);
     }
 
+    body.nobg {
+        background-color: unset;
+    }
 
     #stickyWideboard {
         z-index: 10;
@@ -80,7 +83,10 @@
         display:none;
     }
 
-
+    #wbIfrmSticky{
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
 
 </style>
 
@@ -110,14 +116,16 @@
             '<img src="IMG" alt="sticky wideboards image" /> ' +
             '</a>' +
             '</div>',
-
-            wideboardImg: ' [%TopWideboardImage%]',
+            wideboardHTML5 : '[%TopWideboardHTML5%]',
+            wideboardImg: '[%TopWideboardImage%]',
             stickyWideboardImg: '[%StickyWideboardImage%]',
+            stickyWideboardHTML5 : '[%StickyWideboardHTML5%]',
+
             animationClass: 'animation',
             stickyOffset: 0,
             stickyTop: "[%Stickyoffset%]",
             parentStyle: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx;",
-            parentStyleFallback: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx; left:LEFTpx;transform:scale(.5)",
+            parentStyleFallback: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx; left:LEFTpx;transform:scale(.5);",
             stickyShowTime: parseInt("[%autocloseafter%]") * 1000 // if 0 the stickyBanner will always be shown
         };
 
@@ -132,10 +140,12 @@
                 this.settings = settings;
                 this.wideboard = document.getElementById(this.settings.mainElem);
 
-
-                if (this.settings.wideboardImg !== " ") {
+                if (this.settings.wideboardImg !== "") {
                     this.wideboard.getElementsByTagName("a")[0].appendChild(this.createDomNodeFromHTML('<img src="' + this.settings.wideboardImg + '" />')[0]);
                     this.wideboardImg = this.wideboard.getElementsByTagName('img');
+                }else if(this.settings.wideboardHTML5 !== ""){
+                    this.wideboard.getElementsByTagName("a")[0].appendChild(this.createDomNodeFromHTML('<iframe id="wbIfrm" width="[%HTML5Width%]" height="[%HTML5Height%]" frameborder="none" scrolling="no" src="' + this.settings.wideboardHTML5 + '?%%CLICK_URL_ESC%%&[%ClickThroughUrl%]" ></iframe>')[0]);
+                    this.wideboardImg = [document.getElementById('wbIfrm')];
                 }
 
                 // preinit bounding, will be updated on scroll
@@ -159,6 +169,15 @@
 
                 this.mainElemLoaded = false;
                 this.stickyElemLoaded = false;
+
+
+                // only do this for doodle
+                this.asideContainer = this.document.getElementsByClassName("d-leaderBoardAdContainer")[0];
+                if(this.asideContainer){
+                    document.body.className += " nobg";
+                    this.settings.parentStyle += "left:50%;transform:translateX(-50%);";
+                    this.settings.parentStyleFallback = this.settings.parentStyleFallback.replace("left:LEFTpx;","left:50%;").replace("transform:scale(.5);","transform:translateX(-50%) scale(.5);");
+                }
 
                 //init stickyBanner
                 this.initStickyBanner();
@@ -186,6 +205,7 @@
                 this.mainElemWidth = this.wideboard.offsetWidth;
                 this.mainElemLoaded = true;
                 this.mainElement.style.height = this.mainElemHeight + "px";
+                //this.mainElement.style.width = this.mainElemWidth + "px";
 
                 this.checkScroll();
             },
@@ -225,6 +245,10 @@
                 }else{
                     this.frame.style.cssText = this.settings.parentStyle.replace("TOP", this.settings.stickyTop).replace("LEFT", this.stickyBannerMarginLeft);
                 }
+                //for doodle increase the z-index of the <aside> parent
+                if(this.asideContainer){
+                    this.asideContainer.style.zIndex = 2;
+                }
                 this.frame.height = this.stickyBannerHeight;
                 //this.frame.width = this.stickyBannerWidth;
 
@@ -238,6 +262,10 @@
 
                 this.stickyBanner.className = this.wideboard.className = "";
                 this.frame.style.cssText = "";
+                //for doodle decrease the z-index of the <aside> parent
+                if(this.asideContainer){
+                    this.asideContainer.style.zIndex = 1;
+                }
                 this.frame.height = this.mainElemHeight;
                 //this.frame.width = this.mainElemWidth;
             },
@@ -263,6 +291,11 @@
                         this.stickyElemReady();
                     }
                     this.initCloseBtn();
+                }
+                else if(this.settings.stickyWideboardHTML5.length > 0){
+                    this.stickyBanner = this.createDomNodeFromHTML('<iframe id="wbIfrmSticky" width="[%StickyHTML5Width%]" height="[%StickyHTML5Height%]" frameborder="none" scrolling="no" src="' + this.settings.stickyWideboardHTML5 + '?%%CLICK_URL_ESC%%&[%ClickThroughUrl%]" ></iframe>')[0];
+                    this.insertAfter(this.stickyBanner, this.settings.getAppendElem(this));
+                    this.stickyElemReady();
                 }
 
                 else {
@@ -357,7 +390,7 @@
     })();
 
     //start the banner
-    new stickyWideBoard();
+    var sWB = new stickyWideBoard();
 </script>
 
 

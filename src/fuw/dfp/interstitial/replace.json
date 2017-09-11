@@ -1,0 +1,5 @@
+{
+  "%%CLICK_URL_UNESC%%[%ClickThroughURL%]" : "http://google.ch",
+  "[%LandscapeImg%]" : "http://placehold.it/1024x768",
+  "[%PortraitImg%]" : "http://placehold.it/768x1024"
+}

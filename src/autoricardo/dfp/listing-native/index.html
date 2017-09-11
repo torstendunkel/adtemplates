@@ -1,0 +1,48 @@
+<a class="ric-article" href="%%CLICK_URL_ESC%%[%Url%]" style="border-bottom-width:1px">
+    <div class="ric-article__image">
+        <div class="ric-article__badge ric-article__badge--promo">[%admark%]</div>
+        <img class="[%Image%]" />
+    </div>
+    <div class="ric-article__info-container">
+        <div class="ric-article__main-container">
+            <div class="ric-article__name"><strong>[%headline%]</strong></div>
+            <div class="ric-article__specs ric-article__specs--classified">[%description%]</div>
+            <div class="ric-article__info">[%description2%]</div>
+            <div class="ric-article__extra"><span class="ric-article__location"></span><span class="ric-article__seller_type"></span></div>
+        </div>
+        <div class="ric-article__pricing">
+            <div class="ric-article__time-and-place">
+                <div class="ric-article__end-auction">
+                    <div class="ric-article__delivery ric-layout__phone--show--inline"><span>[%date%]</span></div>
+                </div>
+            </div>
+            <div class="ric-article__price-row">
+                <div class="ric-article__price-cell"><div class="ric-article__offer ric-article__buy"></div></div>
+                <div class="ric-article__price-cell">
+                    <div class="ric-article__price-tag">[%price%]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+
+<script>
+    try{
+        var frame = window.frameElement;
+        frame.style.display = "none";
+        var template = document.getElementsByTagName("a")[0];
+        frame.parentElement.appendChild(template);
+    }
+    catch(e){
+        console.error("Can not append template to parent");
+    }
+
+
+    if("[%ImpressionImage%]".length > 0){
+        (new Image()).src = "[%ImpressionImage%]";
+    }
+
+
+</script>
+
+[%ImpressionTag%]

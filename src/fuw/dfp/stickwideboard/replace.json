@@ -1,11 +1,18 @@
 {
   "%%CLICK_URL_ESC%%[%ClickThroughUrl%]" : "http://google.ch",
-  "[%TopWideboardImage%]" : "http://delay.at/http://placehold.it/994x250/1",
-  "[%StickyWideboardImage%]" : "http://delay.at/http://placehold.it/728x90",
+  "[%StickyWideboardImage%]" : "",
   "[%autocloseafter%]" : 0,
   "[%Stickyoffset%]" : 0,
   "[%ThirdPartyImpressionPixel%]" : "",
+  "[%TopWideboardHTML5%]" : "",
+  "[%StickyWideboardHTML5%]" : "https://drplt4b0mhjxg.cloudfront.net/1504090516028/index.html",
+  "[%stickyPosition%]" : "top",
   "[%TopThirdPartyTag%]" : "<script src=\"https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=rsb&c=28&pli=21521929&PluID=0&w=994&h=250&ncu=$$%%CLICK_URL_UNESC%%$$&ord=%%CACHEBUSTER%%&ucm=true\"></script>",
-  "[%stickyPosition%]" : "top"
+  "[%TopWideboardImage%]" : "",
+  "[%HTML5Width%]" : 994,
+  "[%HTML5Height%]" : 250,
+  "[%StickyHTML5Height%]" : 90,
+  "[%StickyHTML5Width%]" : 728,
+  "?%%CLICK_URL_ESC%%&[%ClickThroughUrl%]" : ""
 
-} 
+}
