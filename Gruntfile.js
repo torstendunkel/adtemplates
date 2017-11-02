@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                     config = grunt.file.readJSON(dir.replace(folderJSON[i].filename, 'replace.json'));
                 }
                 catch(e){
-                    console.info("no replace config found for",folderJSON[i].filename);
+                    //console.info("no replace config found for",folderJSON[i].filename);
                 }
 
                 if(config){
@@ -86,8 +86,6 @@ module.exports = function(grunt) {
                     var file = grunt.file.read(folderJSON[i].location);
 
                     for(var j in config){
-
-
                         var tj = j.replace('[','\\[').replace(']','\\]').replace('&','\\&').replace('?','\\?');
                         var reg = new RegExp(tj,"g");
                         file = file.replace(reg, config[j]);

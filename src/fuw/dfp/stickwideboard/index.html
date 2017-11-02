@@ -37,6 +37,10 @@
         transition: none;
     }
 
+    #container{
+        width:994px;
+    }
+
     #container.animation {
         display: none;
     }
@@ -124,9 +128,10 @@
             animationClass: 'animation',
             stickyOffset: 0,
             stickyTop: "[%Stickyoffset%]",
-            parentStyle: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx;",
-            parentStyleFallback: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx; left:LEFTpx;transform:scale(.5);",
+            parentStyle: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx;width:WIDTHpx",
+            parentStyleFallback: "position:fixed;z-index:10;backface-visibility: hidden;[%stickyPosition%]:TOPpx; left:LEFTpx;transform:scale(.5);width:WIDTHpx",
             stickyShowTime: parseInt("[%autocloseafter%]") * 1000 // if 0 the stickyBanner will always be shown
+
         };
 
         var StickyWideBoard = function () {
@@ -241,9 +246,9 @@
                 this.stickyBanner.className = this.wideboard.className = this.settings.animationClass;
                 this.calcMargin();
                 if(this.stickyFallback){
-                    this.frame.style.cssText = this.settings.parentStyleFallback.replace("TOP", this.settings.stickyTop - this.stickyBannerHeight/4).replace("LEFT", this.stickyBannerMarginLeft);
+                    this.frame.style.cssText = this.settings.parentStyleFallback.replace("TOP", this.settings.stickyTop - this.stickyBannerHeight/4).replace("LEFT", this.stickyBannerMarginLeft).replace("WIDTH", this.mainElemWidth);
                 }else{
-                    this.frame.style.cssText = this.settings.parentStyle.replace("TOP", this.settings.stickyTop).replace("LEFT", this.stickyBannerMarginLeft);
+                    this.frame.style.cssText = this.settings.parentStyle.replace("TOP", this.settings.stickyTop).replace("LEFT", this.stickyBannerMarginLeft).replace("WIDTH", this.mainElemWidth);
                 }
                 //for doodle increase the z-index of the <aside> parent
                 if(this.asideContainer){

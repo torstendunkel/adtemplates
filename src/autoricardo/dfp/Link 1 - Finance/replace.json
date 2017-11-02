@@ -1,0 +1,10 @@
+{
+  "%%CLICK_URL_ESC%%[%ClickThroughUrl%]" : "http://google.ch",
+  "[%description%]" : "Here is a demo native ad that we are going to restyle :)",
+  "[%headline%]" : "Testing native ad",
+  "[%Image%]" : "https://auto.ricardo.ch/assets/pdp/images/eny-icon.png",
+  "[%Text%]" : "Kreditangebot",
+  "[%price%]" : "CHF 29'001",
+  "[%ImpressionTag%]" : "",
+  "[%ImpressionImage%]" : ""
+}
