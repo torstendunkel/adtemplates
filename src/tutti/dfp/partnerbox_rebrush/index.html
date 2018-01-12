@@ -1,0 +1,107 @@
+<html>
+
+<head>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        }
+        /* Container */
+        .mb_link {
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+        /* Image */
+        .mb_img {
+            width: 64px;
+            height: 64px;
+            border: 1px solid #f2f2f2;
+            margin-right: 8px;
+        }
+        /* Text part */
+        .mb_box {
+            display: flex;
+            flex-direction: column;
+        }
+        .mb_head, .mb_text, .mb_address {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            line-height: 14px;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+        }
+        .mb_head {
+            color: #333333;
+        }
+        .mb_text {
+            flex: 1;
+            color: #999999;
+        }
+        .mb_address {
+            color: #007ab7;
+        }
+        .mb_head:hover, .mb_address:hover {
+            text-decoration: underline;
+        }
+
+
+    </style>
+</head>
+<body class="mobile app">
+<a class="mb_link mb_cf" href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
+    <img class="mb_img" src="[%Image%]" width="70" height="70">
+    <div class="mb_box">
+        <h1 class="mb_head">[%Headline%]</h1>
+        <p class="mb_text">[%Description%]</p>
+        <em class="mb_address">[%CallToAction%]</em>
+    </div>
+</a>
+</div>
+
+<script>
+    (function(){
+        var impPixel = "[%ThirdPartyImpressionPixel%]";
+        if(impPixel.length>0){
+            var thirdImp = document.createElement("IMG");
+            thirdImp.src = impPixel;
+            thirdImp.width = "1px";
+            thirdImp.height = "1px";
+            thirdImp.position = "absolute";
+            thirdImp.top = "-100%";
+            document.body.appendChild(thirdImp);
+        }
+
+        var ref;
+        try{
+            ref = window.parent.document.location.href;
+        }catch(e){
+            ref = document.referrer;
+        }
+        var height;
+        if(ref.indexOf('/m.') !== -1){
+            bodyClass = "mobile";
+            height = "66px";
+        }else{
+            bodyClass = "mobile app";
+            height = "66px";
+        }
+        document.body.className=bodyClass;
+
+        try{
+            window.parent.document.getElementById(window.frameElement.id).style.height=height;
+            window.parent.document.getElementById(window.frameElement.id).style.width="100%";
+        }catch(e){}
+
+
+
+    })();
+</script>
+
+</body>
+</html>

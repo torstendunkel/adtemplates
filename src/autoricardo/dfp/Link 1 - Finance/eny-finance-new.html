@@ -14,27 +14,49 @@
             padding: 0 16px;
             text-transform: uppercase;
             cursor: pointer;
-
-
-        }
-
-        a, a:active, a:hover {
-            text-decoration: none;
             height: 46px;
-            line-height: 46px;
-            font-weight: 500;
-            color: #006fa4;
-            margin-bottom: .8em;
-
         }
 
 
+        a{
+            text-decoration : none;
+            color : #006fa4;
+        }
 
-        img{
-            width: 20px;
-            margin-right: 10px;
-            margin-bottom: 3px;
-            vertical-align: middle;
+
+        .txt{
+            padding-right : 10px;
+        }
+
+        .ric-ad-container .small-box {
+            align-items: center;
+
+            display: -ms-flexbox;
+            -ms-flex-wrap: nowrap;
+            -ms-flex-pack: justify;
+
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .img img {
+            max-height: 35px!important;
+            max-width: 35px!important;
+        }
+
+
+        .ric-ad-link{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ric-ad-container{
+            flex: 1 1 100%;
         }
 
     </style>
@@ -42,15 +64,77 @@
 </head>
 
 <body>
+<html>
 
-<a href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" rel="nofollow" target="_blank">
-    <img src="[%Image%]" alt="Allianz Insurance">
-    [%Text%]
-</a>
 
+<head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+
+</head>
+
+
+<body>
+
+
+<div class="ric-ad-link">
+    <div id="4993562" class="ric-ad-container">
+        <a class="adexlink" target="_blank" href="%%CLICK_URL_ESC%%%%DEST_URL%%" rel="nofollow" title="">
+            <div class="small-box">
+                <div id="adTxt4993563" class="txt">
+                </div>
+                <div class="img">
+                    <img src="[%bild%]" width="35" height="35" border="0">
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    function financingLink4993563() {
+
+        var amount = '%%PATTERN:auto_price%%'.replace('\'');
+        amount = amount.length > 0 && !isNaN(parseFloat(amount)) ? amount : 0;
+
+        amount = parseFloat(amount);
+
+        var serviceCharge = parseFloat("[%ServiceCharge%]");
+        var term = parseInt('[%laufzeit%]');
+        var percentage = parseInt('[%prozentsatz%]');
+        var text = '[%text%]';
+        var rate;
+
+        if(!isNaN(serviceCharge) && !isNaN(term) && !isNaN(percentage)){
+            rate = CalcFinancing4993563(percentage, term) * amount / 100;
+            rate = parseFloat((Math.ceil(rate * 20) / 20) + serviceCharge).toFixed(2);
+            text = text.split('[rate]');
+            if(text.length > 1){
+                text = text[0] + rate + text[1];
+            }else{
+                text = text[0]+ rate;
+            }
+        }
+        return '<span>' + text + '</span>';
+    }
+
+    function CalcFinancing4993563(percentage, term) {
+        var P = Math.pow((percentage / 100 + 1), (1 / 12));
+        var P = P - 1;
+        var P = P * 1200;
+        var N = term;
+        var J = P / (12 * 100);
+        var T = 1 + J;
+        var V = 1 / T;
+        var X = V * (1 - Math.pow(V, N)) / (1 - V);
+        var F = 100 / X;
+        return F;
+    }
+    document.getElementById("adTxt4993563").innerHTML = financingLink4993563();
+</script>
 
 <script>
-    var impPixel = "[%ImpressionImage%]";
+    var impPixel = "[%ThirdPartyImpressionPixel%]";
     if (impPixel.length > 0) {
         var thirdImp = document.createElement("IMG");
         thirdImp.src = impPixel;
@@ -63,7 +147,6 @@
     }
 
 </script>
-
 
 [%ImpressionTag%]
 
