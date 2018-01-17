@@ -1,10 +1,30 @@
-
-
 <script>
     var bgBox = window.top.document.querySelectorAll(".page-intro")[0];
 
-    document.querySelectorAll(".page-intro")[0].style.backgroundImage="";
+    if(bgBox){
+        bgBox.style.backgroundImage="url('[%Backgroundimage%]')";
+        var searchBox = window.top.document.getElementById("main-search-form-wrapper");
+        if(searchBox){
+            searchBox.className += " takeover";
+        }
+        else{
+            console.warn("Inside-full-takeover: can not searchbox");
+        }
+
+        // add click to bg
+        bgBox.addEventListener("click",function(e){
+            //check target not to be mobile hint or searchbox
+            if(e.target === bgBox){
+                e.preventDefault();
+                window.open("%%CLICK_URL_UNESC%%[%Url%]","_blank");
+            }
+        });
+    }else{
+        console.warn("Inside-full-takeover: can not find element to append image");
+    }
 
 </script>
 
 [%ThirdPartyTag%]
+
+
