@@ -11,6 +11,7 @@
         html,body{
             margin:0;
             padding:0;
+            height: 1000px;
         }
 
 
@@ -70,22 +71,6 @@
 
             parentNode.appendChild(interstitial);
             frameElement.style.display="none";
-
-
-            if (window.addEventListener) {
-                window.parent.addEventListener("message", closeFrame, false);
-            }
-            else {
-                window.parent.attachEvent("onmessage", closeFrame);
-            }
-
-
-            function closeFrame(obj){
-                if(obj.data === "closeiframe"){
-                    parentNode.style.display="none";
-                }
-            }
-
 
         </script>
 
