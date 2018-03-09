@@ -1,0 +1,78 @@
+
+
+<script>
+    //Template vars
+    var templateVars = {
+        url: "%%CLICK_URL_ESC%%[%Url%]",
+        image : "[%Image%]",
+        listingKeys : ["[%ListingBeschreibung1%]","[%ListingBeschreibung2%]","[%ListingBeschreibung3%]","[%ListingBeschreibung4%]","[%ListingBeschreibung5%]"],
+        listingVals : ["[%ListingWert1%]","[%ListingWert2%]","[%ListingWert3%]","[%ListingWert4%]","[%ListingWert5%]"],
+        headline1 : "[%headline1%]",
+        description1 : "[%description1%]",
+        headline2 : "[%headline2%]",
+        description2 : "[%description2%]",
+        logo : "[%logo%]",
+        price : "[%price%]",
+        impPixel : "[%ImpressionImage%]"
+
+    };
+</script>
+<script src="//s3-eu-west-1.amazonaws.com/templates.das.tamedia.ch/homegate/listing/index.js"> </script>
+
+[%ImpressionTag%]
+
+
+
+
+<div class="box-row">
+    <div class="box-row-item box-row-item--sm-4 box-row-item--md-3 box-row-item--image">
+        <div class="item-content">
+            <div class="box-row-item-shadow">
+
+            </div>
+            <div class="item-content-label">
+                <span>%%price%%</span>
+            </div>
+            <img src="%%image%%" alt="Traumhaftes Apartment im Zürich">
+
+
+        </div>
+    </div>
+    <div class="box-row-item box-row-item--sm-4 box-row-item--md-3 box-row-item--bottom-line-sm box-row-item--attributes">
+        <!-- result-item-attributes -->
+        <div class="item-content">
+            <ul class="box-row-item-attribute-list list--attributed list--flat ad-keyfacts-list">
+
+            <!--
+                <li>
+                    <span class="key">Objekttyp</span>
+                    <span class="value">Wohnung</span>
+                </li>
+             -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="box-row-item box-row-item--md-3 box-row-item--sm-4 box-row-item--tooltip">
+        <div class="item-content item-content--tooltip">
+            <p class="item-title item-title--street">%%headline1%%</p>
+            <p class="item-description">
+                %%description1%%
+            </p>
+            <div class="box-row-item-shortcuts">
+            </div>
+        </div>
+    </div>
+    <div class="box-row-item box-row-item--md-3 box-row-item--show-md box-row-item--details">
+        <div class="item-content">
+            <h2 class="item-title">%%headline2%%</h2>
+            <p class="item-description">%%description2%%</p>
+
+            <div class="item-content-agency">
+                <img src="%%logo%%" alt="ad logo">
+            </div>
+            <div class="item-content-agent-recommendation">
+            </div>
+        </div>
+    </div>
+</div>

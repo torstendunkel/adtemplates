@@ -71,8 +71,6 @@
             max-width : 465px;
             min-width: 320px;
             margin : 0px auto;
-            display: flex;
-            flex-wrap: wrap;
             line-height: 22px;
         }
 
@@ -90,6 +88,7 @@
             position: relative;
             padding-left: 16px;
             margin: auto;
+            float :left;
         }
 
         .ad-image img {
@@ -112,7 +111,7 @@
             text-align: left;
             padding-left: 10px;
             width : 62%;
-
+            float: left;
             box-sizing: border-box;
         }
 
@@ -128,7 +127,7 @@
 
 
 <body>
-
+<a href="%%CLICK_URL_ESC%%%%DEST_URL%%" target="_blank">
 <div class="container">
 
     <div class="ad-image">
@@ -144,10 +143,10 @@
             <p>[%Description%]</p>
         </div>
     </div>
-
+    <div style="clear:both"></div>
 
 </div>
-
+</a>
 
 <script>
         var impPixel = "[%ThirdPartyImpressionPixel%]";

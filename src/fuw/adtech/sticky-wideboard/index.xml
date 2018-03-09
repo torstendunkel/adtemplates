@@ -105,6 +105,11 @@ http://service.h2.adtech.de/h2/bannertemplate.xsd">
 <img src="[pixel_counter]" border="0" width="1" height="1" style="display:none"></img>
 <templatescript> }  </templatescript>
 
+
+<templatescript>    if ('[pixel_counter2]' != '')    { </templatescript>
+<img src="[pixel_counter]" border="0" width="1" height="1" style="display:none"></img>
+<templatescript> }  </templatescript>
+
 <script>
     var stickyWideBoard = (function () {
         'use strict';
