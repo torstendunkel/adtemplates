@@ -1,0 +1,103 @@
+<script charset="UTF-8" src="//drplt4b0mhjxg.cloudfront.net/ubs/mapping_gemcode_2.js"></script>
+<script>
+
+
+    var gemcode = 0;
+    var strCity ="%%PATTERN:cl_kvcity%%";
+    var strLang = "%%PATTERN:language%%";
+
+
+    for (var i = 0; i<maport.length;i++){
+        if (maport[i][0].toString().toLowerCase() == strCity.toString().toLowerCase()){
+            gemcode = maport[i][1];
+            i = maport.length;
+        }
+    }
+
+    if (gemcode ==0) {
+        for (i=0; i<mapplz.length; i++){
+            if (mapplz[i][0] == parseInt("%%PATTERN:cl_kvplz%%%%PATTERN:cl_kvzip%%")){
+                gemcode = mapplz[i][1];
+                i = mapplz.length;
+            }
+        }
+    }
+
+
+
+    var URLstring = "[%Url%]";
+    URLstring = URLstring.replace("__UBS_GEMCODE__", gemcode);
+    URLstring = URLstring.replace("__UBS_LANG__", strLang.toLowerCase());
+
+
+    //Template vars
+    var templateVars = {
+        url: "%%CLICK_URL_ESC%%"+ URLstring,
+        linkText: "[%LinkText%]",
+        showArrow: "[%showArrow%]",
+        boxWrapper: "[%addBoxWrapper%]",
+        impPixel : "[%ImpressionImage%]",
+        infoText : "[%InfoText%]"
+
+    };
+
+    var boxClassName = "box--addendum box--white box--padded text--right";
+    var noBoxClass =  "";
+    var arrowClass = "icon icon-chevron-right margined--right-half text--rel-85";
+    var linkClass = 'text--smaller';
+    var infoSVG = '<label style="cursor: pointer; color:#e63232">&nbsp;<i class="icon icon-info"></i></label>';
+
+
+    var link = document.createElement("a");
+    link.href = templateVars.url;
+    link.className = linkClass;
+    link.target = "_blank";
+    link.textContent = templateVars.linkText;
+
+
+    var frame;
+    try{
+        frame = window.frameElement;
+        frame.style.display = "none";
+        var wrapper = document.createElement("div");
+
+        if(templateVars.boxWrapper !== "false"){
+            wrapper.className = boxClassName;
+        }else if(templateVars.showArrow === "false"){
+            wrapper.className = noBoxClass;
+        }
+
+        wrapper.appendChild(link);
+        if(templateVars.showArrow !== "false"){
+            var arr  = document.createElement("i");
+            arr.className = arrowClass;
+            wrapper.insertBefore(arr, link);
+        }
+
+        if(templateVars.impPixel){
+            (new Image()).src = templateVars.impPixel;
+        }
+
+        if(templateVars.infoText){
+            var label = createDomNodeFromHTML(infoSVG)[0];
+            label.setAttribute("title",templateVars.infoText);
+            wrapper.appendChild(label);
+        }
+
+
+        frame.parentElement.appendChild(wrapper);
+
+    }catch(e){
+        console.error("something went wrong in textlink template");
+    }
+
+    function createDomNodeFromHTML(html) {
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        return div.childNodes;
+    }
+
+</script>
+
+
+[%ImpressionTag%]

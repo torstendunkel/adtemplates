@@ -5,96 +5,57 @@
 <head>
     <meta name="viewport" content="width=device-width">
 
-    <style>
-
-
-        html,body{
-            margin:0;
-            padding:0;
+    <style id="style">
+        body{
+            margin-left: calc(50% - 250px);
+        }
+        #contentWrapper{
+            width : 500px;
+            height: 3000px;
+            border : 1px solid black;
+            position: relative;
+            top: 200px;
         }
 
-
-
-    </style>
-
-
-    <style id="style">
+        .adWrapper{
+            position: relative;
+            width: 320px;
+            height: 250px;
+            margin: 0 auto;
+        }
         .understitial-parent {
             position: absolute;
-            height: 300px;
-            width: 300px;
-            clip: rect(0px 302px 302px 0px);
+            clip: rect(0px 300px 250px 0px);
         }
         .understitial-parent .ad-container{
             position: fixed;
-            bottom: 5%;
+            top: 5%;
             transform: translateZ(0px);
         }
     </style>
-
-
 
 </head>
 
 
 <body>
-<div class="understitial-parent" id="inter" style="position: absolute; height: 100%; width:100%; clip: rect(0px 300px 300px 0px);">
-    <div class="ad-container" style="position: fixed; bottom: 5%; transform: translateZ(0px); left:0; right:0;" >
 
-        <a href="">
-            <img src="2.jpg"/>
-        </a>
-
+<div id="contentWrapper">
+    <p>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </p>
+    <div class="adWrapper">
+        <div class="understitial-parent">
+            <div class="ad-container">
+                <a href="">
+                    <img src="http://placehold.it/320x250.jpg"/>
+                </a>
+            </div>
+        </div>
     </div>
+    <p>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </p>
 </div>
-
-
-<script>
-    var parentNode = window.frameElement.parentNode;
-    var bounding = parentNode.getBoundingClientRect();
-
-
-    var height;
-    var width;
-    try {
-        height = bounding.height + "px";
-        width =  bounding.width + "px";
-    } catch(e) {
-    }
-    var interstitial = document.getElementById("inter");
-
-    interstitial.style.clip = "rect(0px, "+ width +","+  height +",0px)";
-
-    parentNode.style.height = height;
-    parentNode.style.width = width;
-
-    parentNode.appendChild(interstitial);
-    frameElement.style.display="none";
-
-
-    if (window.addEventListener) {
-        window.parent.addEventListener("message", closeFrame, false);
-    }
-    else {
-        window.parent.attachEvent("onmessage", closeFrame);
-    }
-
-
-
-</script>
-
-<script>
-    var impPixel = "[%ThirdPartyImpressionPixelUrl%]";
-    if(impPixel.length>0){
-        var thirdImp = document.createElement("IMG");
-        thirdImp.src = impPixel;
-        thirdImp.width = "1px";
-        thirdImp.height = "1px";
-        thirdImp.style.position = "absolute";
-        thirdImp.style.top = "-100%";
-        document.body.appendChild(thirdImp);
-    }
-</script>
 
 </body>
 </html>

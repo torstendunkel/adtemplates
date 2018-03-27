@@ -1,3 +1,9 @@
+<style>
+    html{
+        cursor: pointer;
+    }
+</style>
+
 <script>
     var bgBox = window.top.document.querySelectorAll(".page-intro")[0];
 
@@ -19,6 +25,12 @@
                 window.open("%%CLICK_URL_UNESC%%[%Url%]","_blank");
             }
         });
+        // add click to bg
+        document.addEventListener("click",function(e){
+            e.preventDefault();
+            window.open("%%CLICK_URL_UNESC%%[%Url%]","_blank");
+        });
+
     }else{
         console.warn("Inside-full-takeover: can not find element to append image");
     }
@@ -26,5 +38,4 @@
 </script>
 
 [%ThirdPartyTag%]
-
 
