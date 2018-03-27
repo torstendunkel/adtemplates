@@ -4,7 +4,7 @@
 
 
 
-function render(text, href){
+function render(text, href, infoText){
 
     var boxClassName = "box--addendum box--white box--padded text--right";
     var noBoxClass =  "";
@@ -35,10 +35,24 @@ function render(text, href){
             arr.className = arrowClass;
             wrapper.insertBefore(arr, link);
         }
+
+        if(infoText){
+            var label = createDomNodeFromHTML(infoSVG)[0];
+            label.setAttribute("title", infoText);
+            wrapper.appendChild(label);
+        }
+
         frame.parentElement.appendChild(wrapper);
     }catch(e){
         console.error("something went wrong in textlink template");
     }
+
+}
+
+function createDomNodeFromHTML(html) {
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    return div.childNodes;
 }
 
 
