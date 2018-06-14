@@ -90,8 +90,14 @@
             var w2 = 0;
 
             if (this.documentWidth_Before !== 0){
-                w = parseInt((this.documentWidth - this.documentWidth_Before) / 2);
-                w2 = parseInt((this.adUnitWidth - this.width) / 2);
+                w += parseInt((this.documentWidth - this.documentWidth_Before) / 2);
+                w2 += parseInt((this.adUnitWidth - this.width) / 2);
+            }
+
+            //if calculation fails
+            if (isNaN(w) || isNaN(w2)){
+                w = 0;
+                w2 = 17;
             }
 
             this.backgroundPosition = this.posLeft + w + w2;
