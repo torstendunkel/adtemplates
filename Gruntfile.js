@@ -113,8 +113,6 @@ module.exports = function(grunt) {
 
     });
 
-
-
     grunt.registerTask('build',[
         'clean:temp',
         'folder_list',
