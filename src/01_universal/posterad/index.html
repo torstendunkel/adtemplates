@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://tdn.da-services.ch/libs/totmConnect.js"></script>
+    <style>
+        body, #posteradcontent{
+            width: [%PosterAdDesktopWidth%]px;
+            height: [%PosterAdDesktopHeight%]px;
+        }
+    </style>
+</head>
+<body>
+<a href="%%CLICK_URL_UNESC%%[%ClickThroughURL%]" target="_blank">
+    <div id="posteradcontent">
+        [%ThirdPartyHTML%]
+    </div>
+</a>
+
+<script>
+
+    var totmPosterAd = {
+
+        height: parseInt("[%PosterAdDesktopHeight%]"),
+        width: parseInt("[%PosterAdDesktopWidth%]"),
+        thirdPartyImpTracker: "[%ThirdPartyImpressionTracker%]",
+        img: "[%AdImage%]",
+        bgColor : "[%BackgroundColor%]",
+        adunitParentContainerId: "",
+        posLeft: 0,
+        adUnitWidth: 0,
+        adUnitId: "",
+        backgroundPosition: 0,
+        documentWidth: 0,
+        documentWidth_Before : 0,
+
+
+        //Initializes poster application after connector ("connect") is triggered
+        init: function (data) {
+
+            //assigne necessary data
+            this.adunitParentContainerId = data.data.slot.parentContainerId;
+            this.posLeft = data.data.position.left;
+            this.adUnitId = data.data.slot.tatmContainerId;
+
+            var containerId = "";
+
+            //exception for 20min
+            if (this.adunitParentContainerId === "billboard") {
+                containerId = ",#min_billboard";
+            }
+
+            this.calculatePosition();
+
+            connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('"+this.img+"')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: "+this.bgColor+"!important;position: relative;min-width: " + this.width + "px;height: " + this.height + "px !important;overflow: hidden;z-index: 9;}"})
+
+        },
+
+        //Drops third party image if available
+        thirdPartyImgTracker: function () {
+            if (this.thirdPartyImpTracker.length > 0) {
+                var imp = new Image(1, 1);
+                imp.src = this.thirdPartyImpTracker;
+            }
+        },
+
+        resize: function (data) {
+            //assigne necessary data
+            this.documentWidth = data.documentWidth;
+            this.adUnitWidth = data.adUnitWidth;
+
+            //only allow when connect has been triggered
+            if (this.adUnitId !== "") {
+                this.calculatePosition();
+                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-position: " + this.backgroundPosition + "px;"});
+            }
+            else
+            {
+                //only the assing the first time will be used to calculate the zoom
+                if (this.documentWidth_Before === 0) {
+                    this.documentWidth_Before = data.documentWidth;
+                }
+            }
+        },
+
+        calculatePosition: function () {
+            //Calculate the zoom and change the left position of posterad
+            var w = 0;
+            var w2 = 0;
+
+            if (this.documentWidth_Before !== 0){
+                w += parseInt((this.documentWidth - this.documentWidth_Before) / 2);
+                w2 += parseInt((this.adUnitWidth - this.width) / 2);
+            }
+
+            //if calculation fails
+            if (isNaN(w) || isNaN(w2)){
+                w = 0;
+                w2 = 17;
+            }
+
+            this.backgroundPosition = this.posLeft + w + w2;
+        }
+    };
+
+    //TOTM connector is loaded and connect event is triggered
+    connector.on("connect", function (data) {
+        totmPosterAd.init(data);
+    });
+
+    //TOTM connector event resize is triggered
+    connector.on("resize", function (data) {
+        totmPosterAd.resize(data);
+    });
+
+</script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -9,59 +10,95 @@
             padding: 0;
             font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         }
-        /* Container */
-        .mb_link {
+
+        .container{
             display: flex;
             flex-direction: row;
+            height: 150px;
+            background-color: #F2F0F2;
+
+        }
+
+        /* Container */
+        .mb_link {
             text-decoration: none;
         }
         /* Image */
         .mb_img {
-            width: 64px;
-            height: 64px;
-            border: 1px solid #f2f2f2;
-            margin-right: 8px;
+
+            width: 100px !important;
+            height: 100px !important;
+            background-color: #ffffff;
+            float: left !important;
+            border: 1px solid #e5e5e5;
+            margin-right: .5rem;
         }
+
         /* Text part */
         .mb_box {
             display: flex;
             flex-direction: column;
+            margin-top: 10px;
         }
-        .mb_head, .mb_text, .mb_address {
-            margin: 0;
-            padding: 0;
-            font-size: 14px;
-            line-height: 14px;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-        }
-        .mb_head {
-            color: #333333;
-        }
+
+
         .mb_text {
             flex: 1;
-            color: #999999;
+            vertical-align: middle !important;
+            font-size: 14px;
+            margin: 0;
+            padding: 5px;
+            color: #333333;
+            font-weight: 600;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
         }
+
         .mb_address {
-            color: #007ab7;
+            text-decoration: none;
+            color: #0399e5;
+            font-style: normal;
+            margin-top: 5px;
+            padding: 5px;
+            font-size: 15px;
+            font-weight: 600;
         }
+
+
+        .mb_head {
+            color: #333333;
+            font-weight: 700;
+            margin: 0px !important;
+            padding: 0px !important;
+            line-height: 35px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+
+
         .mb_head:hover, .mb_address:hover {
             text-decoration: underline;
         }
 
 
+
     </style>
 </head>
 <body class="mobile app">
-<a class="mb_link mb_cf" href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
-    <img class="mb_img" src="[%Image%]" width="70" height="70">
-    <div class="mb_box">
+<div class="container">
+    <a class="mb_link mb_cf" href="%%CLICK_URL_ESC%%[%ClickThroughUrl%]" target="_blank">
         <h1 class="mb_head">[%Headline%]</h1>
-        <p class="mb_text">[%Description%]</p>
-        <em class="mb_address">[%CallToAction%]</em>
-    </div>
-</a>
+        <img class="mb_img" src="[%Image%]" width="70" height="70">
+        <div class="mb_box">
+            <p class="mb_text">[%Description%]</p>
+            <em class="mb_address">[%CallToAction%]</em>
+        </div>
+    </a>
+</div>
 </div>
 
 <script>
@@ -76,32 +113,11 @@
             thirdImp.top = "-100%";
             document.body.appendChild(thirdImp);
         }
-
-        var ref;
-        try{
-            ref = window.parent.document.location.href;
-        }catch(e){
-            ref = document.referrer;
-        }
-        var height;
-        if(ref.indexOf('/m.') !== -1){
-            bodyClass = "mobile";
-            height = "66px";
-        }else{
-            bodyClass = "mobile app";
-            height = "66px";
-        }
-        document.body.className=bodyClass;
-
-        try{
-            window.parent.document.getElementById(window.frameElement.id).style.height=height;
-            window.parent.document.getElementById(window.frameElement.id).style.width="100%";
-        }catch(e){}
-
-
-
     })();
 </script>
-
+<div style="display: none;height: 1px;width: 1px;">
+    [%3rdPartyHtmlTracker%]
+</div>
 </body>
 </html>
+

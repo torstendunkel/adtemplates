@@ -1,0 +1,7 @@
+{
+  "[%PosterAdDesktopHeight%]" : 800,
+  "[%PosterAdDesktopWidth%]" : 960,
+  "[%ThirdPartyImpressionTracker%]" : "http://google.com",
+  "[%AdImage%]" : "https://s3-eu-west-1.amazonaws.com/adops-testing/poster/tessssdasdf.jpg",
+  "[%BackgroundColor%]" : "#ffffff"
+}

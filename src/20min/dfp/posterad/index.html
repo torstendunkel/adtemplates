@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"/>
+    <title>DFP - PosterAd Desktop</title>
+    <script>
+        if(window.navigator.userAgent.indexOf("Edge") != -1){
+            var totmConfig = {
+                connectedCallback: "isconnected",
+                getScrollEvent : "getscrollposition",
+                totmContainerStyle: "position: fixed;bottom: 12%;transform: translate3d(0, 0, 0);-ms-transform: translate3d(0, 0, 0);-webkit-transform: translate3d(0, 0, 0);height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;left: -4000px;",
+                dfpContainerStyle: "position: absolute;height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;overflow: hidden;margin: auto; right: 0; bottom: 0; left: 0;",
+                addStyle: "#min_billboard, #js-fuw-inside-full-pos1, #dfpAd-inside-full-pos1, #inside-full-pos1, .ad-inside-full-pos1{position: relative;height: [%PosterAdDesktopHeight%]px;overflow: hidden;z-index: 9;background-color:#ffffff;}#dfpAd-inside-full-pos1{width: [%PosterAdDesktopWidth%]px;}",
+            };
+
+
+
+            function isconnected(connect,data) {
+                eltopOffset = data.data.position.top;
+            }
+
+
+            var getscrollposition = function (data) {
+                toppos = (eltopOffset -data.scrollTop);
+                if (toppos>0){
+                    totmConfig = {
+                        totmContainerStyle: "position: fixed;bottom: 12%;transform: translate3d(0, 0, 0);-ms-transform: translate3d(0, 0, 0);-webkit-transform: translate3d(0, 0, 0);top: "+toppos+"px;height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;"
+                    };
+                    connector.pushDataToTOTM(totmConfig);
+                }
+                else {
+
+                    totmConfig = {
+                        totmContainerStyle: "position: fixed;bottom: 12%;transform: translate3d(0, 0, 0);-ms-transform: translate3d(0, 0, 0);-webkit-transform: translate3d(0, 0, 0);height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;",
+                        dfpContainerStyle: "position: absolute;clip: rect(0px [%PosterAdDesktopWidth%]px [%PosterAdDesktopHeight%]px 0px);height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;overflow: hidden;margin: auto; top: 0; right: 0; bottom: 0; left: 0;"
+                    };
+                    connector.pushDataToTOTM(totmConfig);
+
+                    getscrollposition = function (data) {
+                    }
+                }
+            };
+        }
+        else
+        {
+            var totmConfig = {
+                totmContainerStyle: "position: fixed;bottom: 12%;transform: translate3d(0, 0, 0);-ms-transform: translate3d(0, 0, 0);-webkit-transform: translate3d(0, 0, 0);height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;",
+                dfpContainerStyle: "position: absolute;height: [%PosterAdDesktopHeight%]px;width: [%PosterAdDesktopWidth%]px;clip: rect(0px [%PosterAdDesktopWidth%]px [%PosterAdDesktopHeight%]px 0px);overflow: hidden;margin: auto; top: 0; right: 0; bottom: 0; left: 0;",
+                addStyle: "#min_billboard, #js-fuw-inside-full-pos1, #dfpAd-inside-full-pos1, #inside-full-pos1, .ad-inside-full-pos1{position: relative;height: [%PosterAdDesktopHeight%]px;overflow: hidden;z-index: 9;background-color:[%BackgroundColor%];}#dfpAd-inside-full-pos1{width: [%PosterAdDesktopWidth%]px;}"
+            };
+        }
+    </script>
+    <script src="https://tdn.da-services.ch/libs/totmConnect.js"></script>
+    <style> #posteradcontent {
+        width: [%PosterAdDesktopWidth%];
+        height: [%PosterAdDesktopHeight%];
+    } </style>
+</head>
+<body>
+<div id="posteradcontent"> [%ThirdPartyHTML%]</div>
+<script type="text/javascript"> var thirdPartyImpTracker = "[%ThirdPartyImpressionTracker%]";
+var adimage = "[%AdImage%]";
+if (thirdPartyImpTracker.length > 0) {
+    var imp = new Image(1, 1);
+    imp.src = thirdPartyImpTracker;
+}
+if (adimage.length > 0) {
+    var adimageelement = document.createElement("img");
+    adimageelement.src = adimage;
+    adimageelement.height = [%PosterAdDesktopHeight%];
+    adimageelement.width = [%PosterAdDesktopWidth%];
+
+    var adimagelink = document.createElement("a");
+    adimagelink.href = "%%CLICK_URL_UNESC%%[%ClickThroughURL%]";
+    adimagelink.target = "_blank";
+    adimagelink.appendChild(adimageelement);
+
+    document.getElementById("posteradcontent").appendChild(adimagelink);
+} </script>
+</body>
+</html>

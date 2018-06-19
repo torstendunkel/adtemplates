@@ -1,0 +1,128 @@
+<html>
+<head>
+    <style>body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    html {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+
+
+
+    body.mobile{
+        height: 48px;
+        width: 100%;
+    }
+
+
+    .nolink, .nolink:hover {
+        color: black;
+        text-decoration: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007ab7;
+        cursor: pointer;
+    }
+
+    a:hover, a:focus {
+        text-decoration: underline;
+    }
+
+    .link {
+        overflow: hidden;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        font-size: 14px;
+    }
+
+
+    .mobile .link{
+        height: 48px;
+        line-height: 48px;
+        border-bottom: 1px solid #f2f2f2;
+        padding: 0 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: inherit;
+        box-sizing: border-box;
+    }
+
+
+    .mobile.app .link{
+        border:none;
+        padding : 0 !important;
+        line-height: 48px;
+    }
+
+    .link::selected {
+        color: #FFFFFF;
+    }</style>
+</head>
+<body class="desktop">
+<div id="afd">
+    <a target="_blank" id="text" href="%%CLICK_URL_UNESC%%[%Link%]" class="link"></a>
+</div>
+<script>
+
+
+    (function(){
+        var impPixel = "[%ThirdPartyImpressionPixel%]";
+        if(impPixel.length>0){
+            var thirdImp = document.createElement("IMG");
+            thirdImp.src = impPixel;
+            thirdImp.width = "1px";
+            thirdImp.height = "1px";
+            thirdImp.position = "absolute";
+            thirdImp.top = "-100%";
+            document.body.appendChild(thirdImp);
+        }
+
+
+        var ref;
+        try{
+            ref = window.parent.document.location.href;
+        }catch(e){
+            ref = document.referrer;
+        }
+
+        var height;
+        var bodyClass;
+        if(ref.indexOf('/www.') !== -1){
+            bodyClass = "desktop";
+            height = "20px";
+        }else if(ref.indexOf('/m.') !== -1){
+            bodyClass = "mobile";
+            height = "48px";
+        }else{
+            bodyClass = "mobile app";
+            height = "48px";
+        }
+        document.body.className=bodyClass;
+        try{
+            window.parent.document.getElementById(window.frameElement.id).style.height=height;
+            window.parent.document.getElementById(window.frameElement.id).style.width="100%";
+        }catch(e){}
+    })();
+
+
+
+
+
+</script>
+
+[%ThirdPartyTag%]
+</body>
+</html>
