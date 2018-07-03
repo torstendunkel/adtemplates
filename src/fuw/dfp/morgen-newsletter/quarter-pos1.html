@@ -1,0 +1,43 @@
+<html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+redirecting....
+
+
+<script>
+    var ts = new Date().getTime();
+    document.write(
+        "<a href='https://pubads.g.doubleclick.net/gampad/jump?iu=/46753895/de-fuw.ch/newsletter-morgen/quarter-pos1&sz=300x250&c="+ts+"' style='display:none'>" +
+        "<img id='nlimg' src='https://pubads.g.doubleclick.net/gampad/ad?iu=/46753895/de-fuw.ch/newsletter-morgen/quarter-pos1&sz=300x250&c="+ts+"'/>" +
+        "</a>");
+</script>
+
+
+<script>
+    var img = document.getElementById("nlimg");
+    img.onload = function(){
+        var link = document.getElementsByTagName("a")[0].href;
+        document.location.href = link;
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!--
+<a href='https://s3-eu-west-1.amazonaws.com/media.das.tamedia.ch/newsletter/fuw/morgen-newsletter/quarter-pos1.html'>
+    <img src='https://pubads.g.doubleclick.net/gampad/ad?iu=/46753895/de-fuw.ch/newsletter-morgen/quarter-pos1&amp;sz=300x250&amp;c=*|DATE:|*'/>
+</a>
+ End -->
+
+
