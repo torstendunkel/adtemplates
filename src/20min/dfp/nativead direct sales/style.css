@@ -1,0 +1,119 @@
+html, body{
+    margin:0;
+    padding: 0;
+    font-family: BentonConSansBold, Arial, Helvetica, sans-serif;;
+}
+
+#container{
+    margin: 0 auto;
+    position: relative;
+
+}
+
+#pos2{
+    background-color: #282828;
+
+}
+
+#image img {
+    display: block;
+}
+
+#logo{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+}
+
+#advertising{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #0F3C91;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 12px;
+}
+
+#headlineText{
+    color: #C0C0C0;
+    font-size: 15px;
+    font-weight: normal;
+    padding-bottom: 15px;
+}
+
+#titleText{
+    color: #F2F2F2;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 2px;
+}
+
+
+#bodyText{
+    color: #CCCCCC;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+#cta{
+    color: #3860B4;
+    font-size: 14px;
+    font-weight: normal;
+    padding-top: 30px;
+}
+
+#cta a{
+    color: #3860B4;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.text{
+    padding: 30px 20px 30px 20px;
+}
+
+
+
+/* Mobile */
+@media screen and (max-width: 969px) {
+    #container {
+        width: 100%;
+    }
+    #pos1 img{
+        width: 100%;
+    }
+
+    #pos2{
+        width: 100%;
+    }
+    #bodyText{
+        display: none;
+    }
+}
+/* Desktop */
+@media screen and (min-width: 970px) {
+    #container {
+        width: 970px;
+        height: 250px;
+    }
+    #pos1{
+        float: left;
+        width: 50%;
+        height: 250px;
+    }
+
+    #pos2{
+        float:right;
+        width: 50%;
+        height: 250px;
+    }
+    #bodyText{
+        display: inline;
+    }
+}
