@@ -25,6 +25,7 @@
         height: parseInt("[%PosterAdDesktopHeight%]"),
         width: parseInt("[%PosterAdDesktopWidth%]"),
         thirdPartyImpTracker: "[%ThirdPartyImpressionTracker%]",
+        adunitCode : "%%ADUNIT%%",
         img: "[%AdImage%]",
         bgColor : "[%BackgroundColor%]",
         adunitParentContainerId: "",
@@ -53,8 +54,15 @@
 
             this.calculatePosition();
 
-            connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('"+this.img+"')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: "+this.bgColor+"!important;position: relative;min-width: " + this.width + "px;height: " + this.height + "px !important;overflow: hidden;z-index: 9;}"})
-
+            //tutti exception
+            if (this.adunitCode.indexOf("tutti.ch") !== -1)
+            {
+                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('"+this.img+"')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: "+this.bgColor+"!important;position: relative;height: " + this.height + "px !important;z-index: 9;}"})
+            }
+            else
+            {
+                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('"+this.img+"')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: "+this.bgColor+"!important;min-width: " + this.width + "px;min-height: " + this.height + "px !important;z-index: 9;}"})
+            }
         },
 
         //Drops third party image if available
