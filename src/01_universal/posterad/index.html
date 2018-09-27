@@ -5,9 +5,9 @@
     <title>Title</title>
     <script src="https://tdn.da-services.ch/libs/totmConnect.js"></script>
     <style>
-        body, #posteradcontent{
-            width: [%PosterAdDesktopWidth%]px;
-            height: [%PosterAdDesktopHeight%]px;
+        body, #posteradcontent {
+            width: [% PosterAdDesktopWidth% ] px;
+            height: [% PosterAdDesktopHeight% ] px;
         }
     </style>
 </head>
@@ -25,16 +25,17 @@
         height: parseInt("[%PosterAdDesktopHeight%]"),
         width: parseInt("[%PosterAdDesktopWidth%]"),
         thirdPartyImpTracker: "[%ThirdPartyImpressionTracker%]",
-        adunitCode : "%%ADUNIT%%",
+        adunitCode: "%%ADUNIT%%",
         img: "[%AdImage%]",
-        bgColor : "[%BackgroundColor%]",
+        bgColor: "[%BackgroundColor%]",
         adunitParentContainerId: "",
         posLeft: 0,
         adUnitWidth: 0,
         adUnitId: "",
         backgroundPosition: 0,
         documentWidth: 0,
-        documentWidth_Before : 0,
+        documentWidth_Before: 0,
+        iframePositionLeft: 0,
 
 
         //Initializes poster application after connector ("connect") is triggered
@@ -55,13 +56,11 @@
             this.calculatePosition();
 
             //tutti exception
-            if (this.adunitCode.indexOf("tutti.ch") !== -1)
-            {
-                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('"+this.img+"')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: "+this.bgColor+"!important;position: relative;height: " + this.height + "px !important;z-index: 9;}"})
+            if (this.adunitCode.indexOf("tutti.ch") !== -1) {
+                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{margin-left: " + this.iframePositionLeft + "px;background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('" + this.img + "')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: " + this.bgColor + "!important;position: relative;height: " + this.height + "px !important;z-index: 9;}"})
             }
-            else
-            {
-                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('"+this.img+"')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: "+this.bgColor+"!important;min-width: " + this.width + "px;min-height: " + this.height + "px !important;z-index: 9;}"})
+            else {
+                connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{margin-left: " + this.iframePositionLeft + "px;background-attachment: fixed; background-position: " + this.backgroundPosition + "px;background-repeat: no-repeat;z-index: 1; background-image: url('" + this.img + "')}" + "#" + this.adunitParentContainerId + containerId + "{background-color: " + this.bgColor + "!important;min-width: " + this.width + "px;min-height: " + this.height + "px !important;z-index: 9;}"})
             }
         },
 
@@ -83,8 +82,7 @@
                 this.calculatePosition();
                 connector.pushDataToTOTM({addStyle: "#" + this.adUnitId + " div iframe{background-position: " + this.backgroundPosition + "px;"});
             }
-            else
-            {
+            else {
                 //only the assing the first time will be used to calculate the zoom
                 if (this.documentWidth_Before === 0) {
                     this.documentWidth_Before = data.documentWidth;
@@ -97,18 +95,23 @@
             var w = 0;
             var w2 = 0;
 
-            if (this.documentWidth_Before !== 0){
+            if (this.documentWidth_Before !== 0) {
                 w += parseInt((this.documentWidth - this.documentWidth_Before) / 2);
                 w2 += parseInt((this.adUnitWidth - this.width) / 2);
             }
 
             //if calculation fails
-            if (isNaN(w) || isNaN(w2)){
+            if (isNaN(w) || isNaN(w2)) {
                 w = 0;
                 w2 = 17;
             }
 
             this.backgroundPosition = this.posLeft + w + w2;
+
+            //prevent cropping newsnet
+            if (this.adunitCode.indexOf("bazonline.ch") !== -1 || this.adunitCode.indexOf("berneroberlaender.ch") !== -1 || this.adunitCode.indexOf("bernerzeitung.ch") !== -1 || this.adunitCode.indexOf("derbund.ch") !== -1 || this.adunitCode.indexOf("immobaz.ch") !== -1 || this.adunitCode.indexOf("langenthalertagblatt.ch") !== -1 || this.adunitCode.indexOf("tagesanzeiger.ch") !== -1 || this.adunitCode.indexOf("thunertagblatt.ch") !== -1 || this.adunitCode.indexOf("24heures.ch") !== -1 || this.adunitCode.indexOf("lematin.ch") !== -1 || this.adunitCode.indexOf("tdg.ch") !== -1 || this.adunitCode.indexOf("landbote.ch") !== -1 || this.adunitCode.indexOf("zuonline.ch") !== -1 || this.adunitCode.indexOf("zsz.ch") !== -1) {
+                this.iframePositionLeft = parseInt(this.backgroundPosition - this.posLeft);
+            }
         }
     };
 
