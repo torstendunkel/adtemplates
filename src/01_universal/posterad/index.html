@@ -6,8 +6,8 @@
     <script src="https://tdn.da-services.ch/libs/totmConnect.js"></script>
     <style>
         body, #posteradcontent {
-            width: [% PosterAdDesktopWidth% ] px;
-            height: [% PosterAdDesktopHeight% ] px;
+            width: [%PosterAdDesktopWidth%]px;
+            height: [%PosterAdDesktopHeight%]px;
         }
     </style>
 </head>
@@ -40,6 +40,9 @@
 
         //Initializes poster application after connector ("connect") is triggered
         init: function (data) {
+
+            //Trigger 3rd party img
+            this.thirdPartyImgTracker();
 
             //assigne necessary data
             this.adunitParentContainerId = data.data.slot.parentContainerId;
