@@ -1,0 +1,113 @@
+{
+  "teads_config": [
+    {
+      "adunit": "inside-full-pos1/lifestyle",
+      "teads_placement_id": "76365"
+    },
+    {
+      "adunit": "inside-full-pos1/leben",
+      "teads_placement_id": "76365"
+    },
+    {
+      "adunit": "inside-full-pos1/people",
+      "teads_placement_id": "76365"
+    },
+    {
+      "adunit": "inside-full-pos1/community",
+      "teads_placement_id": "76365"
+    },
+    {
+      "adunit": "inside-full-pos1/living",
+      "teads_placement_id": "76365"
+    },
+    {
+      "adunit": "inside-full-pos1/fitness",
+      "teads_placement_id": "76365"
+    },
+    {
+      "adunit": "inside-full-pos1/entertainment",
+      "teads_placement_id": "76364"
+    },
+    {
+      "adunit": "inside-full-pos1/finance",
+      "teads_placement_id": "76371"
+    },
+    {
+      "adunit": "inside-full-pos1/news",
+      "teads_placement_id": "34874"
+    },
+    {
+      "adunit": "inside-full-pos1/wohnen",
+      "teads_placement_id": "89214"
+    },
+
+    {
+      "adunit": "inside-full-pos1/",
+      "teads_placement_id": "88754"
+    },
+     {
+      "adunit": "inside-full-comment-pos1",
+      "teads_placement_id": "101101"
+    },
+     {
+      "adunit": "inside-full-comment-pos1/wohnen",
+      "teads_placement_id": "101726"
+    },
+       {
+      "adunit": "inside-full-comment-pos2/wohnen",
+      "teads_placement_id": "101726"
+    },
+        {
+      "adunit": "inside-full-comment-pos3/wohnen",
+      "teads_placement_id": "101726"
+    },
+         {
+      "adunit": "inside-full-comment-pos4/wohnen",
+      "teads_placement_id": "101726"
+    },
+           {
+      "adunit": "inside-full-comment-pos5/wohnen",
+      "teads_placement_id": "101726"
+    },
+             {
+      "adunit": "inside-full-comment-pos6/wohnen",
+      "teads_placement_id": "101726"
+    },
+                 {
+      "adunit": "inside-full-comment-pos7/wohnen",
+      "teads_placement_id": "101726"
+    },
+                     {
+      "adunit": "inside-full-comment-pos8/wohnen",
+      "teads_placement_id": "101726"
+    },
+    {
+      "adunit": "inside-full-comment-pos2",
+      "teads_placement_id": "101101"
+    },
+    {
+      "adunit": "inside-full-comment-pos3",
+      "teads_placement_id": "101101"
+    },
+    {
+      "adunit": "inside-full-comment-pos4",
+      "teads_placement_id": "101101"
+    },
+    {
+      "adunit": "inside-full-comment-pos5",
+      "teads_placement_id": "101101"
+    },
+    {
+      "adunit": "inside-full-comment-pos6",
+      "teads_placement_id": "101101"
+    },
+    {
+      "adunit": "inside-full-comment-pos7",
+      "teads_placement_id": "101101"
+    },
+    {
+      "adunit": "inside-full-comment-pos8",
+      "teads_placement_id": "101101"
+    }
+  ]
+}
