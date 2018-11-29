@@ -1,0 +1,60 @@
+{
+  "teads_config": [
+    {
+      "adunit": "inside-full-pos1/lifestyle",
+      "teads_placement_id": "76377"
+    },
+    {
+      "adunit": "inside-full-pos1/musique",
+      "teads_placement_id": "76377"
+    },
+    {
+      "adunit": "inside-full-pos1/entertainment",
+      "teads_placement_id": "76376"
+    },
+    {
+      "adunit": "inside-full-pos1/economie",
+      "teads_placement_id": "76374"
+    },
+    {
+      "adunit": "inside-full-pos1/news",
+      "teads_placement_id": "35069"
+    },
+    {
+      "adunit": "inside-full-pos1/",
+      "teads_placement_id": "76378"
+    },
+    {
+      "adunit": "inside-full-comment-pos1",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos2",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos3",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos4",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos5",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos6",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos7",
+      "teads_placement_id": "101102"
+    },
+    {
+      "adunit": "inside-full-comment-pos8",
+      "teads_placement_id": "101102"
+    }
+  ]
+}
