@@ -6,8 +6,8 @@
     <script src="https://tdn.da-services.ch/libs/totmConnect.js"></script>
     <style>
         body, #posteradcontent {
-            width: [%PosterAdDesktopWidth%]px;
-            height: [%PosterAdDesktopHeight%]px;
+            width: [% PosterAdDesktopWidth% ] px;
+            height: [% PosterAdDesktopHeight% ] px;
         }
     </style>
 </head>
@@ -42,7 +42,7 @@
         init: function (data) {
 
             //set background color for fresh sites
-            if (this.fresh === 'true' && this.bgColor === '#ffffff'){
+            if (this.fresh === 'true' && this.bgColor === '#ffffff') {
                 this.bgColor = '#f0efef';
             }
 
@@ -81,6 +81,13 @@
         },
 
         resize: function (data) {
+            //custom rule for tio because of the design switch
+            if (this.adunitCode.indexOf("tio.ch") !== -1) {
+                if (data.innerWidth > 1500 && !this.posLeft) {
+                    this.posLeft = 245;
+                }
+            }
+
             //assigne necessary data
             this.documentWidth = data.documentWidth;
             this.adUnitWidth = data.adUnitWidth;
