@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        var impressionPixel = "[%ThirdPartyImpressionTracker%]";
+
+        if (impressionPixel.length > 0){
+            new Image(1,1).src=impressionPixel;
+        }
+    </script>
 </head>
 <body>
 <a href="%%CLICK_URL_UNESC%%%%DEST_URL%%" target="_blank">
@@ -21,5 +28,8 @@
         <div id="advertising"><span>[%Advertising%]</span></div>
     </div>
 </a>
+<div style="display: none;">
+    [%ThirdPartyHTML%]
+</div>
 </body>
 </html>

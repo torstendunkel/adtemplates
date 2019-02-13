@@ -1,0 +1,83 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        /* Mobile */
+        @media screen and (max-aspect-ratio: 16/9) and (min-width: 250px) {
+            .horizontal {
+
+            }
+            .background{
+                background-image: url("Unbenannt2.png");
+                opacity: 0.6;
+            }
+            .inline-block{
+                display: block;
+            }
+            .first {
+                width: 100%;
+                height: 250px;
+            }
+            .second {
+                width: 100%;
+                height: 250px;
+            }
+            .third {
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        @media screen and (min-aspect-ratio: 16/9) {
+            .horizontal {
+                width: 995px;
+                height: 250px;
+            }
+            .background{
+                background-image: url("Unbenannt.png");
+                opacity: 0.6;
+            }
+            .inline-block{
+                display: inline-block;
+            }
+            .first {
+                width: 275px;
+                height: 250px;
+            }
+            .second {
+                margin-left: -4px;
+            }
+            .third {
+                width: 275px;
+                height: 250px;
+                margin-left: -4px;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="horizontal">
+        <div class="first inline-block background"></div>
+        <div class="second inline-block">
+            <video id="video" width="444" preload="" autoplay="" loop="" muted="">
+                <source src="https://streaming.adspot.ch/adspot/ch.coop/201808_kids_green/de/spot.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="third inline-block background"></div>
+
+    </div>
+</div>
+</body>
+</html>

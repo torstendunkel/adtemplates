@@ -35,10 +35,16 @@
         documentWidth: 0,
         documentWidth_Before: 0,
         iframePositionLeft: 0,
+        fresh: '%%PATTERN:fresh%%',
 
 
         //Initializes poster application after connector ("connect") is triggered
         init: function (data) {
+
+            //set background color for fresh sites
+            if (this.fresh === 'true' && this.bgColor === '#ffffff') {
+                this.bgColor = '#f0efef';
+            }
 
             //Trigger 3rd party img
             this.thirdPartyImgTracker();
@@ -75,6 +81,13 @@
         },
 
         resize: function (data) {
+            //custom rule for tio because of the design switch
+            if (this.adunitCode.indexOf("tio.ch") !== -1) {
+                if (data.innerWidth > 1500 && !this.posLeft) {
+                    this.posLeft = 245;
+                }
+            }
+
             //assigne necessary data
             this.documentWidth = data.documentWidth;
             this.adUnitWidth = data.adUnitWidth;
