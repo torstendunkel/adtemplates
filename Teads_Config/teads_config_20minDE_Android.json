@@ -45,6 +45,15 @@
       "adunit": "inside-full-pos1/",
       "teads_placement_id": "88754"
     },
+    {
+      "adunit": "inside-full-pos1/schweiz/energychallenge",
+      "teads_placement_id": "thisChannelMustNotServeAnyAds"
+    },
+     {
+      "adunit": "inside-full-pos1/kultur/kaffeepause",
+      "teads_placement_id": "thisChannelMustNotServeAnyAds"
+    },
+
      {
       "adunit": "inside-full-comment-pos1",
       "teads_placement_id": "101101"

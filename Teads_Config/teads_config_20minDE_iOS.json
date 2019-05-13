@@ -40,6 +40,14 @@
       "adunit": "inside-full-pos1/wohnen",
       "teads_placement_id": "101824"
     },
+      {
+      "adunit": "inside-full-pos1/schweiz/energychallenge",
+      "teads_placement_id": "thisChannelMustNotServeAnyAds"
+    },
+      {
+      "adunit": "inside-full-pos1/kultur/kaffeepause",
+      "teads_placement_id": "thisChannelMustNotServeAnyAds"
+    },
     {
       "adunit": "inside-full-pos1/",
       "teads_placement_id": "92526"

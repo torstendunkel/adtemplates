@@ -20,6 +20,14 @@
       "adunit": "inside-full-pos1/news",
       "teads_placement_id": "87013"
     },
+     {
+      "adunit": "inside-full-pos1/news/energychallenge",
+      "teads_placement_id": "ThisAdMustNotServeAnyAds"
+    },
+     {
+      "adunit": "inside-full-pos1/culture/loisirs/pausecafe",
+      "teads_placement_id": "ThisAdMustNotServeAnyAds"
+    },
     {
       "adunit": "inside-full-pos1/",
       "teads_placement_id": "87017"
