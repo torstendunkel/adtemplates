@@ -1,0 +1,40 @@
+{
+    "teads_config": [
+      {
+        "adunit": "inside-full-pos1/leben",
+        "teads_placement_id": "87376"
+      },
+      {
+        "adunit": "inside-full-pos1/panorama",
+        "teads_placement_id": "87376"
+      },
+      {
+        "adunit": "inside-full-pos1/wissen",
+        "teads_placement_id": "87376"
+      },
+      {
+        "adunit": "inside-full-pos1/blog",
+        "teads_placement_id": "87378"
+      },
+      {
+        "adunit": "inside-full-pos1/wirtschaft",
+        "teads_placement_id": "87372"
+      },
+      {
+        "adunit": "inside-full-pos1/zuerich",
+        "teads_placement_id": "87371"
+      },
+      {
+        "adunit": "inside-full-pos1/schweiz",
+        "teads_placement_id": "87371"
+      },
+      {
+        "adunit": "inside-full-pos1/ausland",
+        "teads_placement_id": "87371"
+      },
+      {
+        "adunit": "inside-full-pos1/",
+        "teads_placement_id": "87370"
+      }
+    ]
+  }

@@ -1,0 +1,40 @@
+{
+    "teads_config": [
+      {
+        "adunit": "inside-full-pos1/vivre",
+        "teads_placement_id": "87407"
+      },
+      {
+        "adunit": "inside-full-pos1/people",
+        "teads_placement_id": "87407"
+      },
+      {
+        "adunit": "inside-full-pos1/savoirs-sante",
+        "teads_placement_id": "87407"
+      },
+      {
+        "adunit": "inside-full-pos1/loisirs",
+        "teads_placement_id": "87411"
+      },
+      {
+        "adunit": "inside-full-pos1/economie",
+        "teads_placement_id": "87410"
+      },
+      {
+        "adunit": "inside-full-pos1/geneve",
+        "teads_placement_id": "87409"
+      },
+      {
+        "adunit": "inside-full-pos1/suisse",
+        "teads_placement_id": "87409"
+      },
+      {
+        "adunit": "inside-full-pos1/monde",
+        "teads_placement_id": "87409"
+      },
+      {
+        "adunit": "inside-full-pos1/",
+        "teads_placement_id": "87405"
+      }
+    ]
+  }
